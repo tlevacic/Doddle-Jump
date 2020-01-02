@@ -2,12 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
-#include "Game.h"
 
 
-Layout::Layout(Game* g)
+
+Layout::Layout()
 {
-	this->WindowSize = g->getSize(); //Get size of window.
+	WindowSize = sf::Vector2u(400, 500); //Get size of window.
 }
 
 int Layout::setSprites(std::string s1, std::string s2, std::string s3)
@@ -35,6 +35,21 @@ int Layout::setSprites(std::string s1, std::string s2, std::string s3)
 		this->platform.setTexture(this->plat);
 	if (this->play.loadFromFile(s3))
 		this->player.setTexture(this->play);
+}
+
+sf::Sprite Layout::getBackground()
+{
+	return this->background;
+}
+
+sf::Sprite Layout::getPlatform()
+{
+	return this->platform;
+}
+
+sf::Sprite Layout::getPlayer()
+{
+	return this->player;
 }
 
 

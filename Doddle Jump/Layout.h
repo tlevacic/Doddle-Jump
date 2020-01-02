@@ -1,9 +1,11 @@
 #pragma once
 
+
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
 #include <string>
+
 
 class Layout
 {
@@ -14,8 +16,11 @@ private:
 	sf::Sprite background, platform, player;
 
 public:
-	Layout(Game* g);
+	Layout();
 	int setSprites(std::string s1, std::string s2, std::string s3);
+	sf::Sprite getBackground();
+	sf::Sprite getPlatform();
+	sf::Sprite getPlayer();
 	~Layout();
 };
 

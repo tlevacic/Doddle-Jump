@@ -45,6 +45,8 @@ void Game::update()
 void Game::render()
 {
 	//window->draw();
+	this->window->draw(this->backgroud);
+	this->window->draw(this->player);
 	window->display();
 }
 
@@ -64,6 +66,13 @@ void Game::pollEvents()
 sf::Vector2u Game::getSize()
 {
 	return window->getSize();
+}
+
+void Game::setSprites(Layout * const l)
+{
+	this->backgroud = l->getBackground();
+	this->platform = l->getPlatform();
+	this->player = l->getPlayer();
 }
 
 

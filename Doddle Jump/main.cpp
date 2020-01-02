@@ -11,7 +11,10 @@ int main()
 	//Add menu class
 	Game game(400,500);
 	Event e;
-	Layout l(&game);
+	Layout *l=new Layout();
+	l->setSprites("images/sky.png", "images/platform.png", "images/doodle.png");
+	game.setSprites(l);
+
 	while (game.isRunning())
 	{		
 		game.update();

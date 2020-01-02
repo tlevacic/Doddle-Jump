@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
+#include "Layout.h"
+
 //Game class
 class Game
 {
@@ -12,6 +14,7 @@ private:
 	sf::Event e;
 	int width;
 	int height;
+	sf::Sprite backgroud, platform, player;
 //Public variables
 public:
 
@@ -30,6 +33,7 @@ public:
 	void render();
 	void pollEvents();
 	sf::Vector2u getSize();
+	void setSprites(Layout * const l);
 	~Game();
 };
 
