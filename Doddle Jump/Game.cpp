@@ -108,20 +108,22 @@ void Game::movePlayer()
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		
-		if ((playerPosition.x += 5) + 50 <= this->width)
-			playerPosition.x += 5;
+		if ((playerPosition.x += 1) + 50 <= this->width)
+			playerPosition.x += 1;
 		else
 			playerPosition.x = -20;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
-		if ((playerPosition.x -= 5) > 0)
-			playerPosition.x -= 5;
+		if ((playerPosition.x -= 1) > 0)
+			playerPosition.x -= 1;
 		else
-			playerPosition.x = this->height;
+			playerPosition.x = this->width;
 	}
 	//Every time, user mofify coordinates, set new player position
 	player.setPosition(playerPosition.x, playerPosition.y);
+
+	std::cout << "Coordinates are " << playerPosition.x << " " << playerPosition.y<<"\n";
 }
 
 
