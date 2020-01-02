@@ -44,13 +44,7 @@ void Game::update()
 	//Every time check if there is pollEvents
 	this->pollEvents();
 	this->playerActions();
-	//Hero needs to be added game logic!!!!
-	//
-	//
-	//
-	//
-	//
-	//_------------------------------------
+
 }
 
 //Render game window
@@ -144,10 +138,10 @@ void Game::drawplatformPosition()
 
 void Game::playerActions()
 {
-	movePlayerScreen();
-	playerJump();
-	playerCollision();
 	movePlayer();
+	playerJump();
+	movePlayerScreen();
+	playerCollision();
 	playerDead();
 }
 
@@ -164,18 +158,37 @@ void Game::playerDead()
 
 void Game::playerJump()
 {
-	dy += 0, 3;
+	dy += 0.3;
 	playerPosition.y += dy;
 }
 
 void Game::movePlayerScreen()
 {
-	
+	if (playerPosition.y < this->distinct)
+		for (int i = 0; i < 10; i++)
+		{
+			playerPosition.y = distinct;
+			platformPosition[i].y = platformPosition[i].y - dy;
+
+			
+			if (platformPosition[i].y > this->height)
+			{
+				platformPosition[i].y = 0;
+				platformPosition[i].x = rand() % this->width;
+			}
+		}
 }
 
 void Game::playerCollision()
 {
-	
+	for (int i = 0; i < 10; i++)
+		if ((playerPosition.x + 50 > platformPosition[i].x) && 
+			(playerPosition.x + 20 < platformPosition[i].x + 68)
+			&& (playerPosition.y + 70 > platformPosition[i].y) 
+			&& (playerPosition.y + 70 < platformPosition[i].y + 14)
+			&& (dy > 0))
+			dy = -10;
+
 }
 
 

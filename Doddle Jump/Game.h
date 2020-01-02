@@ -15,7 +15,7 @@ private:
 	sf::Event e;
 	int width;
 	int height;
-	const int distinct=250;
+	const int distinct=200;
 	float dy = 0;
 	sf::Sprite backgroud, platform, player;
 	Point platformPosition[20];
