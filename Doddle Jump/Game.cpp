@@ -65,7 +65,7 @@ void Game::render()
 	//
 	//
 	//_------------------------------------
-	drawPlatforms();
+	drawplatformPosition();
 	this->window->draw(this->player);
 	window->display();
 }
@@ -95,13 +95,14 @@ void Game::setSprites(Layout * const l)
 	this->player = l->getPlayer();
 }
 
-void Game::createPlatforms()
+void Game::createplatformPosition()
 {
 	//Need to add margin between every object
 	for (int i = 0; i < 10; i++)
 	{
-		platforms[i].x = rand() % this->width;
-		platforms[i].y = rand() % this->height;
+		platformPosition[i].x = rand() % this->width;
+		platformPosition[i].y = rand() % this->height;
+		std::cout << platformPosition[i].x << " " << platformPosition[i].y << "\n";
 	}
 }
 
@@ -110,15 +111,15 @@ void Game::movePlayer()
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		
-		if ((playerPosition.x += 1) + 50 <= this->width)
-			playerPosition.x += 1;
+		if ((playerPosition.x += 3) + 50 <= this->width)
+			playerPosition.x += 3;
 		else
 			playerPosition.x = -20;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
-		if ((playerPosition.x -= 1) > 0)
-			playerPosition.x -= 1;
+		if ((playerPosition.x -= 3) > 0)
+			playerPosition.x -= 3;
 		else
 			playerPosition.x = this->width;
 	}
@@ -127,11 +128,12 @@ void Game::movePlayer()
 	player.setPosition(playerPosition.x, playerPosition.y);
 }
 
-void Game::drawPlatforms()
+void Game::drawplatformPosition()
 {
+	createplatformPosition();
 	for (int i = 0; i < 10; i++)
 	{
-		platform.setPosition(platforms[i].x, platforms[i].y);
+		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
 		window->draw(platform);
 	}
 }

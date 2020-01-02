@@ -18,7 +18,7 @@ private:
 	const int distinct=250;
 	float dy = 0;
 	sf::Sprite backgroud, platform, player;
-	Point platforms[20];
+	Point platformPosition[20];
 	Point playerPosition;
 
 //Public variables
@@ -40,9 +40,9 @@ public:
 	void pollEvents();
 	sf::Vector2u getSize() const;
 	void setSprites(Layout * const l);
-	void createPlatforms();
+	void createplatformPosition();
 	void movePlayer();
-	void drawPlatforms();
+	void drawplatformPosition();
 	~Game();
 };
 
