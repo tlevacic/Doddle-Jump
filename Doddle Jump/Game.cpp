@@ -1,19 +1,22 @@
 #include "Game.h"
-#include <SFML/Graphics.hpp>
-#include <time.h>
-#include <iostream>
-#include "Point.h"
+
 
 using namespace sf;
+
 
 
 void Game::initVariables()
 {
 	//Set window pointer on NULL (dont needed, just for safe)
-	//NEED TO BE DELETED
+	//NEEDS TO BE DELETED
 	this->window = nullptr;
-	this->playerPosition.x = 100;
-	this->playerPosition.y = 0;
+	p = new Player(this->platformPosition);
+	p->playerPosition.x = 0;
+	p->playerPosition.y = 0;
+	p->width = this->width;
+	p->height = this->height;
+	p->distinct = this->distinct;
+	p->dy = this->dy;
 
 	for (int i = 0;i < 10;i++)
 	{
@@ -49,13 +52,14 @@ void Game::update()
 {
 	//Every time check if there is pollEvents
 	this->pollEvents();
-	this->playerActions();
+	p->playerActions();
 
 }
 
 //Render game window
 void Game::render()
 {
+	player.setPosition(p->playerPosition.x, p->playerPosition.y);
 	this->window->draw(this->backgroud);
 	this->window->draw(this->player);
 	this->drawplatformPosition();
@@ -94,17 +98,17 @@ void Game::movePlayer()
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
 		
-		if ((playerPosition.x += 3) + 50 <= this->width)
-			playerPosition.x += 3;
+		if ((p->playerPosition.x += 3) + 50 <= this->width)
+			p->playerPosition.x += 3;
 		else
-			playerPosition.x = -20;
+			p->playerPosition.x = -20;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
-		if ((playerPosition.x -= 3) > 0)
-			playerPosition.x -= 3;
+		if ((p->playerPosition.x -= 3) > 0)
+			p->playerPosition.x -= 3;
 		else
-			playerPosition.x = this->width;
+			p->playerPosition.x = this->width;
 	}
 
 	//NEED TO DELETE, Just for debuging
@@ -114,7 +118,7 @@ void Game::movePlayer()
 	}*/
 	//Every time, user mofify coordinates, set new player position
 
-	player.setPosition(playerPosition.x, playerPosition.y);
+	player.setPosition(p->playerPosition.x, p->playerPosition.y);
 }
 
 void Game::drawplatformPosition()
@@ -132,61 +136,8 @@ void Game::drawplatformPosition()
 	
 }
 
-void Game::playerActions()
-{
-	movePlayer();
-	playerJump();
-	movePlayerScreen();
-	playerCollision();
-	playerDead();
-}
 
-void Game::playerDead()
-{
 
-	if (playerPosition.y > (this->height) -100)
-	{
-		////
-		//window.close();
-		dy -= 10;
-	}
-}
-
-void Game::playerJump()
-{
-	dy += 0.3;
-	playerPosition.y += dy;
-}
-
-void Game::movePlayerScreen()
-{
-	if (playerPosition.y < this->distinct)
-		for (int i = 0; i < 10; i++)
-		{
-			playerPosition.y = distinct;
-			platformPosition[i].y = platformPosition[i].y - dy;
-
-			
-			if (platformPosition[i].y > this->height)
-			{
-				platformPosition[i].y = 0;
-				platformPosition[i].x = rand() % this->width;
-			}
-		}
-}
-
-void Game::playerCollision()
-{
-	//Fixed values based on size of picture
-	for (int i = 0; i < 10; i++)
-		if ((playerPosition.x + 50 > platformPosition[i].x) && 
-			(playerPosition.x + 20 < platformPosition[i].x + 68)
-			&& (playerPosition.y + 70 > platformPosition[i].y) 
-			&& (playerPosition.y + 70 < platformPosition[i].y + 14)
-			&& (dy > 0))
-			dy = -10;
-
-}
 
 
 Game::~Game()
@@ -214,6 +165,7 @@ void Game::createPlatformPosition()
 			}
 		}
 
+		std::cout<<"Pozicija je "<<y<<"\n";
 		platformPosition[i].y = y;		
 		platformPosition[i].x = rand() % this->width;
 	}

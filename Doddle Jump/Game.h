@@ -5,26 +5,28 @@
 #include <iostream>
 #include "Layout.h"
 #include "Point.h"
+#include "Player.h"
 
 //Game class
 class Game
 {
 //Private variables
-private:
+	////
+
+	public:
+	Player *p;
 	sf::RenderWindow* window;
 	sf::Event e;
-	int width;
-	int height;
 	const int distinct=200;
 	float dy = 0;
 	sf::Sprite backgroud, platform, player;
 	Point platformPosition[20];
-	Point playerPosition;
 	bool platformInit = false;
 
 //Public variables
 public:
-
+	int width;
+	int height;
 
 //Private methods
 	void initVariables();
@@ -44,11 +46,7 @@ public:
 	void movePlayer();
 	void createPlatformPosition();
 	void drawplatformPosition();
-	void playerActions();
-	void playerDead();
-	void playerJump();
-	void movePlayerScreen();
-	void playerCollision();
+
 	~Game();
 
 //Help methods

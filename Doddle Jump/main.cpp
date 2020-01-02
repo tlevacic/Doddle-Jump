@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Game.h"
 #include "Layout.h"
+#include "Player.h"
 
 using namespace sf;
 int main()
