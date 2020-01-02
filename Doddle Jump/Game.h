@@ -20,6 +20,7 @@ private:
 	sf::Sprite backgroud, platform, player;
 	Point platformPosition[20];
 	Point playerPosition;
+	bool platformInit = false;
 
 //Public variables
 public:
@@ -40,9 +41,14 @@ public:
 	void pollEvents();
 	sf::Vector2u getSize() const;
 	void setSprites(Layout * const l);
-	void createplatformPosition();
 	void movePlayer();
+	void createPlatformPosition();
 	void drawplatformPosition();
+	void playerActions();
+	void playerDead();
+	void playerJump();
+	void movePlayerScreen();
+	void playerCollision();
 	~Game();
 };
 

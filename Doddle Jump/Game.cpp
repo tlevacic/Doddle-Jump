@@ -43,7 +43,7 @@ void Game::update()
 {
 	//Every time check if there is pollEvents
 	this->pollEvents();
-	this->movePlayer();
+	this->playerActions();
 	//Hero needs to be added game logic!!!!
 	//
 	//
@@ -56,17 +56,9 @@ void Game::update()
 //Render game window
 void Game::render()
 {
-	//window->draw();
 	this->window->draw(this->backgroud);
-	//Hero needs to be added drawing platorms!!!!
-	//
-	//
-	//
-	//
-	//
-	//_------------------------------------
-	drawplatformPosition();
 	this->window->draw(this->player);
+	this->drawplatformPosition();
 	window->display();
 }
 
@@ -95,16 +87,7 @@ void Game::setSprites(Layout * const l)
 	this->player = l->getPlayer();
 }
 
-void Game::createplatformPosition()
-{
-	//Need to add margin between every object
-	for (int i = 0; i < 10; i++)
-	{
-		platformPosition[i].x = rand() % this->width;
-		platformPosition[i].y = rand() % this->height;
-		std::cout << platformPosition[i].x << " " << platformPosition[i].y << "\n";
-	}
-}
+
 
 void Game::movePlayer()
 {
@@ -123,19 +106,76 @@ void Game::movePlayer()
 		else
 			playerPosition.x = this->width;
 	}
+
+	//NEED TO DELETE, Just for debuging
+	if (Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		playerPosition.y -= 2;
+	}
 	//Every time, user mofify coordinates, set new player position
 
 	player.setPosition(playerPosition.x, playerPosition.y);
 }
 
+void Game::createPlatformPosition()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		platformPosition[i].x = rand() % this->width;
+		platformPosition[i].y = rand() % this->height;
+	}
+	this->platformInit = true;
+}
+
 void Game::drawplatformPosition()
 {
-	createplatformPosition();
+	//Need to add margin between every object
+	if (!this->platformInit)
+	{
+		this->createPlatformPosition();
+	}
 	for (int i = 0; i < 10; i++)
 	{
 		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
 		window->draw(platform);
 	}
+	
+}
+
+void Game::playerActions()
+{
+	movePlayerScreen();
+	playerJump();
+	playerCollision();
+	movePlayer();
+	playerDead();
+}
+
+void Game::playerDead()
+{
+
+	if (playerPosition.y > (this->height) -100)
+	{
+		////
+		//window.close();
+		dy -= 10;
+	}
+}
+
+void Game::playerJump()
+{
+	dy += 0, 3;
+	playerPosition.y += dy;
+}
+
+void Game::movePlayerScreen()
+{
+	
+}
+
+void Game::playerCollision()
+{
+	
 }
 
 

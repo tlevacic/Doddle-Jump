@@ -7,12 +7,15 @@
 using namespace sf;
 int main()
 {
+	//Create game window
 	Game game(400,500);
-	Event e;
+
+	//Create layout for game
 	Layout *l=new Layout();
 	l->setSprites("images/sky.png", "images/platform.png", "images/doodle.png");
 	game.setSprites(l);
 
+	//Game loop
 	while (game.isRunning())
 	{		
 		game.update();
