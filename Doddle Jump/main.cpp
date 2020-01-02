@@ -4,5 +4,6 @@
 using namespace sf;
 int main()
 {
-
+	//Add game class
+	//Add menu class
  }
