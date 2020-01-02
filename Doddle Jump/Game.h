@@ -42,6 +42,7 @@ public:
 	void setSprites(Layout * const l);
 	void createPlatforms();
 	void movePlayer();
+	void drawPlatforms();
 	~Game();
 };
 

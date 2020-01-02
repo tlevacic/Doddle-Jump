@@ -20,6 +20,7 @@ void Game::initVariables()
 void Game::initGameWindow()
 {
 	this->window=new sf::RenderWindow(VideoMode(this->width, this->height), "Doodle Jump!");
+	window->setFramerateLimit(60);
 }
 
 //Create window with given width / height.
@@ -64,6 +65,7 @@ void Game::render()
 	//
 	//
 	//_------------------------------------
+	drawPlatforms();
 	this->window->draw(this->player);
 	window->display();
 }
@@ -121,9 +123,17 @@ void Game::movePlayer()
 			playerPosition.x = this->width;
 	}
 	//Every time, user mofify coordinates, set new player position
-	player.setPosition(playerPosition.x, playerPosition.y);
 
-	std::cout << "Coordinates are " << playerPosition.x << " " << playerPosition.y<<"\n";
+	player.setPosition(playerPosition.x, playerPosition.y);
+}
+
+void Game::drawPlatforms()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		platform.setPosition(platforms[i].x, platforms[i].y);
+		window->draw(platform);
+	}
 }
 
 
