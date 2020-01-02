@@ -8,11 +8,11 @@ using namespace sf;
 int main()
 {
 	//Create game window
-	Game game(400,500);
+	Game game(400,560);
 
 	//Create layout for game
 	Layout *l=new Layout();
-	l->setSprites("images/sky.png", "images/platform.png", "images/doodle.png");
+	l->setSprites("images/background.png", "images/platform.png", "images/doodle.png");
 	game.setSprites(l);
 
 	//Game loop

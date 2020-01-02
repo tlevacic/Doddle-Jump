@@ -13,7 +13,13 @@ void Game::initVariables()
 	//NEED TO BE DELETED
 	this->window = nullptr;
 	this->playerPosition.x = 100;
-	this->playerPosition.y = 200;
+	this->playerPosition.y = 0;
+
+	for (int i = 0;i < 10;i++)
+	{
+		platformPosition[i].x = 0;
+		platformPosition[i].y = 0;
+	}
 }
 
 //Creating game window
@@ -102,23 +108,13 @@ void Game::movePlayer()
 	}
 
 	//NEED TO DELETE, Just for debuging
-	if (Keyboard::isKeyPressed(Keyboard::Space))
+	/*if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		playerPosition.y -= 2;
-	}
+		playerPosition.y += 7;
+	}*/
 	//Every time, user mofify coordinates, set new player position
 
 	player.setPosition(playerPosition.x, playerPosition.y);
-}
-
-void Game::createPlatformPosition()
-{
-	for (int i = 0; i < 10; i++)
-	{
-		platformPosition[i].x = rand() % this->width;
-		platformPosition[i].y = rand() % this->height;
-	}
-	this->platformInit = true;
 }
 
 void Game::drawplatformPosition()
@@ -196,4 +192,51 @@ Game::~Game()
 {
 	//Delete window pointer
 	delete this->window;
+}
+
+
+void Game::createPlatformPosition()
+{
+	for (int i = 0; i < 10; i++)
+	{
+		//First- create random number (height of platform)
+		int y = rand() % this->height;
+		//Second- check if another platform is to close
+		if (!checkIfNumberExist(platformPosition, (sizeof(platformPosition) / sizeof(*platformPosition)), y))
+			//Look another number
+		{
+			while (1)
+			{
+				y = rand() % this->height;
+				if (checkIfNumberExist(platformPosition, (sizeof(platformPosition) / sizeof(*platformPosition)), y))
+					break;
+			}
+		}
+
+		platformPosition[i].y = y;		
+		platformPosition[i].x = rand() % this->width;
+	}
+	this->platformInit = true;
+}
+
+bool Game::inRange(int start, int end, int nbr)
+{
+	//Returns true if nubmer IS in range
+	for (int i = start;i < end;i++)
+	{
+		if (i == nbr)
+			return true;
+	}
+	return false;
+}
+
+bool Game::checkIfNumberExist(Point *arr, int n, int y)
+{
+	//Returns true if 
+	for (int i = 0;i < n;i++)
+	{
+		if (inRange((arr+i)->y,(arr + i)->y + 25, y))
+			return false;
+	}
+	return true;
 }

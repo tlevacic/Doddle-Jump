@@ -7,7 +7,7 @@
 
 Layout::Layout()
 {
-	WindowSize = sf::Vector2u(400, 500); //Get size of window.
+	WindowSize = sf::Vector2u(400, 560); //Get size of window.
 }
 
 int Layout::setSprites(std::string s1, std::string s2, std::string s3)

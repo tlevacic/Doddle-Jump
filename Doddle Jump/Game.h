@@ -50,5 +50,10 @@ public:
 	void movePlayerScreen();
 	void playerCollision();
 	~Game();
+
+//Help methods
+private:
+	bool checkIfNumberExist(Point *arr,int n,int y);
+	bool inRange(int start,int end, int nbr);
 };
 
