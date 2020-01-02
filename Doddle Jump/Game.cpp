@@ -177,6 +177,7 @@ void Game::movePlayerScreen()
 
 void Game::playerCollision()
 {
+	//Fixed values based on size of picture
 	for (int i = 0; i < 10; i++)
 		if ((playerPosition.x + 50 > platformPosition[i].x) && 
 			(playerPosition.x + 20 < platformPosition[i].x + 68)
