@@ -61,6 +61,11 @@ void Game::pollEvents()
 	}
 }
 
+sf::Vector2u Game::getSize()
+{
+	return window->getSize();
+}
+
 
 Game::~Game()
 {

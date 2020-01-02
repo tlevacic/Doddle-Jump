@@ -29,6 +29,7 @@ public:
 	void update();
 	void render();
 	void pollEvents();
+	sf::Vector2u getSize();
 	~Game();
 };
 
