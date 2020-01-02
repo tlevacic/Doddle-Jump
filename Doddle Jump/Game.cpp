@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 #include <iostream>
+#include "Point.h"
 
 using namespace sf;
 
@@ -11,6 +12,8 @@ void Game::initVariables()
 	//Set window pointer on NULL (dont needed, just for safe)
 	//NEED TO BE DELETED
 	this->window = nullptr;
+	this->playerPosition.x = 100;
+	this->playerPosition.y = 200;
 }
 
 //Creating game window
@@ -39,7 +42,7 @@ void Game::update()
 {
 	//Every time check if there is pollEvents
 	this->pollEvents();
-
+	this->movePlayer();
 	//Hero needs to be added game logic!!!!
 	//
 	//
@@ -88,6 +91,37 @@ void Game::setSprites(Layout * const l)
 	this->backgroud = l->getBackground();
 	this->platform = l->getPlatform();
 	this->player = l->getPlayer();
+}
+
+void Game::createPlatforms()
+{
+	//Need to add margin between every object
+	for (int i = 0; i < 10; i++)
+	{
+		platforms[i].x = rand() % this->width;
+		platforms[i].y = rand() % this->height;
+	}
+}
+
+void Game::movePlayer()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Right))
+	{
+		
+		if ((playerPosition.x += 5) + 50 <= this->width)
+			playerPosition.x += 5;
+		else
+			playerPosition.x = -20;
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Left))
+	{
+		if ((playerPosition.x -= 5) > 0)
+			playerPosition.x -= 5;
+		else
+			playerPosition.x = this->height;
+	}
+	//Every time, user mofify coordinates, set new player position
+	player.setPosition(playerPosition.x, playerPosition.y);
 }
 
 
