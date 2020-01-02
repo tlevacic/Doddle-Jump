@@ -37,17 +37,17 @@ int Layout::setSprites(std::string s1, std::string s2, std::string s3)
 		this->player.setTexture(this->play);
 }
 
-sf::Sprite Layout::getBackground()
+sf::Sprite Layout::getBackground() const
 {
 	return this->background;
 }
 
-sf::Sprite Layout::getPlatform()
+sf::Sprite Layout::getPlatform() const
 {
 	return this->platform;
 }
 
-sf::Sprite Layout::getPlayer()
+sf::Sprite Layout::getPlayer() const
 {
 	return this->player;
 }

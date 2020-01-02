@@ -7,8 +7,6 @@
 using namespace sf;
 int main()
 {
-	//Add game class
-	//Add menu class
 	Game game(400,500);
 	Event e;
 	Layout *l=new Layout();

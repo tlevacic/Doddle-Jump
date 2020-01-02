@@ -18,9 +18,9 @@ private:
 public:
 	Layout();
 	int setSprites(std::string s1, std::string s2, std::string s3);
-	sf::Sprite getBackground();
-	sf::Sprite getPlatform();
-	sf::Sprite getPlayer();
+	sf::Sprite getBackground() const;
+	sf::Sprite getPlatform() const;
+	sf::Sprite getPlayer() const;
 	~Layout();
 };
 
