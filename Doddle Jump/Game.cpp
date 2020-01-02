@@ -39,6 +39,14 @@ void Game::update()
 {
 	//Every time check if there is pollEvents
 	this->pollEvents();
+
+	//Hero needs to be added game logic!!!!
+	//
+	//
+	//
+	//
+	//
+	//_------------------------------------
 }
 
 //Render game window
@@ -46,6 +54,13 @@ void Game::render()
 {
 	//window->draw();
 	this->window->draw(this->backgroud);
+	//Hero needs to be added drawing platorms!!!!
+	//
+	//
+	//
+	//
+	//
+	//_------------------------------------
 	this->window->draw(this->player);
 	window->display();
 }
@@ -63,7 +78,7 @@ void Game::pollEvents()
 	}
 }
 
-sf::Vector2u Game::getSize()
+sf::Vector2u Game::getSize() const
 {
 	return window->getSize();
 }
