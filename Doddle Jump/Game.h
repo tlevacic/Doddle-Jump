@@ -6,6 +6,7 @@
 #include "Layout.h"
 #include "Point.h"
 #include "Player.h"
+#include "resource.h"
 
 //Game class
 class Game
