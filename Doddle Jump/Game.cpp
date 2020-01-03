@@ -53,6 +53,7 @@ void Game::update()
 	//Every time check if there is pollEvents
 	this->pollEvents();
 	p->playerActions();
+	this->movePlatform();
 
 }
 
@@ -136,6 +137,24 @@ void Game::drawplatformPosition()
 	
 }
 
+void Game::movePlatform()
+{
+	
+	//Make game harded, constantly moving platforms
+	for (int i = 0;i < 10;i++)
+	{
+		
+		//Move only specific platforms by x asis.
+		/*if (*(arr + i) == i)
+		{
+			if (platformPosition[i].x += 3 + 68 <= this->width)
+				platformPosition[i].x += 3;
+		}*/
+		//Move ALL platforms by Y asis.
+		//platformPosition[i].y += 2;
+	}
+}
+
 
 
 
@@ -182,6 +201,7 @@ bool Game::inRange(int start, int end, int nbr)
 	}
 	return false;
 }
+
 
 bool Game::checkIfNumberExist(Point *arr, int n, int y)
 {

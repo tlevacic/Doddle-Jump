@@ -22,8 +22,8 @@ class Game
 	float dy = 0;
 	sf::Sprite backgroud, platform, player;
 	Point platformPosition[20];
+	int *arr = nullptr;
 	bool platformInit = false;
-
 //Public variables
 public:
 	int width;
@@ -47,6 +47,7 @@ public:
 	void movePlayer();
 	void createPlatformPosition();
 	void drawplatformPosition();
+	void movePlatform();
 
 	~Game();
 
@@ -54,5 +55,7 @@ public:
 private:
 	bool checkIfNumberExist(Point *arr,int n,int y);
 	bool inRange(int start,int end, int nbr);
+
+
 };
 
