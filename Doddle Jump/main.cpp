@@ -4,10 +4,14 @@
 #include "Game.h"
 #include "Layout.h"
 #include "Player.h"
+#include "Menu.h"
 
 using namespace sf;
 int main()
 {
+
+
+
 	//Create game window
 	Game game(400,560);
 
@@ -17,6 +21,7 @@ int main()
 	game.setSprites(l);
 
 	//Game loop
+
 	while (game.isRunning())
 	{		
 		game.update();

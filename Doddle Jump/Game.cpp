@@ -5,6 +5,15 @@ using namespace sf;
 
 
 
+void Game::startGame()
+{
+	//
+	if (Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		this->dead = false;
+	}
+}
+
 void Game::initVariables()
 {
 	//Set window pointer on NULL (dont needed, just for safe)
@@ -51,6 +60,7 @@ bool Game::isRunning()
 void Game::update()
 {
 	//Every time check if there is pollEvents
+	this->startGame();
 	this->pollEvents();
 	p->playerActions();
 	this->movePlatform();
@@ -60,10 +70,21 @@ void Game::update()
 //Render game window
 void Game::render()
 {
-	player.setPosition(p->playerPosition.x, p->playerPosition.y);
 	this->window->draw(this->backgroud);
-	this->window->draw(this->player);
-	this->drawplatformPosition();
+
+	if (this->dead)
+	{
+		Menu m;
+		m.setText("Doddle Jump");
+		
+		m.show(window);
+	}
+	else
+	{
+		player.setPosition(p->playerPosition.x, p->playerPosition.y);
+		this->window->draw(this->player);
+		this->drawplatformPosition();
+	}
 	window->display();
 }
 

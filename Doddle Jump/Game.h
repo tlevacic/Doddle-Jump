@@ -7,6 +7,7 @@
 #include "Point.h"
 #include "Player.h"
 #include "resource.h"
+#include "Menu.h"
 
 //Game class
 class Game
@@ -24,6 +25,8 @@ class Game
 	Point platformPosition[20];
 	int *arr = nullptr;
 	bool platformInit = false;
+	bool dead= true;
+	void startGame();
 //Public variables
 public:
 	int width;
