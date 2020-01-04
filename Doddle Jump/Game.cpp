@@ -74,13 +74,39 @@ void Game::render()
 
 	if (this->dead)
 	{
-		Menu title,info;
+		sf::Vector2f center = this->centerOfScreen();
+		center.x = 50;
+		center.y -= 100;
+
+		Menu title,info, scoreText;
 		//Name of game
 		title.setText("Doddle Jump");
 		title.setColor(sf::Color::Black);
-		title.setPosition(sf::Vector2f(100, 80));
+		title.setPosition(center);
 		title.setSize(40);
 		title.show(window);
+
+		//Info
+		center.y += 100;
+		center.x += 20;
+		info.setText("Space to Start game");
+		info.setColor(sf::Color::Black);
+		info.setPosition(center);
+		info.setSize(20);
+		info.show(window);
+
+		//Score
+		if (this->score != 0)
+		{
+			sf::Vector2f center2 = this->centerOfScreen();
+			center2.y = center.y + 80;
+			center2.x -=30;
+			scoreText.setText("Score: " + std::to_string(score));
+			scoreText.setColor(sf::Color::Black);
+			scoreText.setPosition(center2);
+			scoreText.setSize(15);
+			scoreText.show(window);
+		}
 	}
 	else
 	{
@@ -224,6 +250,11 @@ bool Game::inRange(int start, int end, int nbr)
 			return true;
 	}
 	return false;
+}
+
+sf::Vector2f Game::centerOfScreen()
+{
+	return Vector2f(width/2,height/2);
 }
 
 

@@ -27,6 +27,7 @@ class Game
 	bool platformInit = false;
 	bool dead= true;
 	void startGame();
+	int score = 10;
 //Public variables
 public:
 	int width;
@@ -58,6 +59,7 @@ public:
 private:
 	bool checkIfNumberExist(Point *arr,int n,int y);
 	bool inRange(int start,int end, int nbr);
+	sf::Vector2f centerOfScreen();
 
 
 };

@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 
-//Add functions for setColor, setSize, setPosition, setStyle
 
 Menu::Menu()
 {
