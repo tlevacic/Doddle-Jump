@@ -51,6 +51,8 @@ public:
 	void createPlatformPosition();
 	void drawplatformPosition();
 	void movePlatform();
+	bool dead = false;
+	void playerDead();
 
 	~Game();
 

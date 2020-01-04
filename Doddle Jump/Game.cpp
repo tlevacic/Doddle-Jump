@@ -9,7 +9,9 @@ void Game::startGame()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		p->dead = false;
+		std::cout << "First" << dead << "\n";
+		this->dead = false;
+		std::cout << dead << "\n";
 	}
 }
 
@@ -60,10 +62,10 @@ void Game::update()
 {
 	//Every time check if there is pollEvents
 	this->startGame();
+	playerDead();
 	this->pollEvents();
 	p->playerActions();
 	this->movePlatform();
-
 }
 
 //Render game window
@@ -71,7 +73,7 @@ void Game::render()
 {
 	this->window->draw(this->backgroud);
 
-	if (p->dead)
+	if (this->dead)
 	{
 		sf::Vector2f center = this->centerOfScreen();
 		center.x = 50;
@@ -201,6 +203,14 @@ void Game::movePlatform()
 		}*/
 		//Move ALL platforms by Y asis.
 		//platformPosition[i].y += 2;
+	}
+}
+
+void Game::playerDead()
+{
+	if (p->playerPosition.y > (height)-120)
+	{
+		this->dead = true;
 	}
 }
 

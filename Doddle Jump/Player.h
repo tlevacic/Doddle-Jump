@@ -17,12 +17,10 @@ public:
 public:
 	Point playerPosition;
 	void playerActions();
-	void playerDead();
 	void playerJump();
 	void movePlayerScreen();
 	void playerCollision();
 	void movePlayer();
-	bool dead = false;
 public:
 	Player(Point *p);
 	~Player();

@@ -8,16 +8,8 @@ void Player::playerActions()
 	playerJump();
 	movePlayerScreen();
 	playerCollision();
-	playerDead();
 }
 
-void Player::playerDead()
-{
-	if (playerPosition.y > (height) - 120)
-	{
-		dead = true;
-	}
-}
 
 void Player::playerJump()
 {
@@ -77,7 +69,6 @@ void Player::movePlayer()
 
 Player::Player(Point *p)
 {
-
 	this->platformPosition = p;
 }
 Player::~Player()
