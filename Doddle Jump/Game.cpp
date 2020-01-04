@@ -7,10 +7,9 @@ using namespace sf;
 
 void Game::startGame()
 {
-	//
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		this->dead = false;
+		p->dead = false;
 	}
 }
 
@@ -72,7 +71,7 @@ void Game::render()
 {
 	this->window->draw(this->backgroud);
 
-	if (this->dead)
+	if (p->dead)
 	{
 		sf::Vector2f center = this->centerOfScreen();
 		center.x = 50;

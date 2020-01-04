@@ -25,7 +25,6 @@ class Game
 	Point platformPosition[20];
 	int *arr = nullptr;
 	bool platformInit = false;
-	bool dead= true;
 	void startGame();
 	int score = 10;
 //Public variables

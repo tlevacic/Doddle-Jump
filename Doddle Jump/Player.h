@@ -22,6 +22,7 @@ public:
 	void movePlayerScreen();
 	void playerCollision();
 	void movePlayer();
+	bool dead = false;
 public:
 	Player(Point *p);
 	~Player();

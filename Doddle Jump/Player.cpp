@@ -13,11 +13,9 @@ void Player::playerActions()
 
 void Player::playerDead()
 {
-	if (playerPosition.y > (height) - 100)
+	if (playerPosition.y > (height) - 120)
 	{
-		////
-		//window.close();
-		dy -= 10;
+		dead = true;
 	}
 }
 
@@ -43,6 +41,7 @@ void Player::movePlayerScreen()
 			}
 		}
 }
+
 
 void Player::playerCollision()
 {
