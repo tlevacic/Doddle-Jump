@@ -74,10 +74,13 @@ void Game::render()
 
 	if (this->dead)
 	{
-		Menu m;
-		m.setText("Doddle Jump");
-		
-		m.show(window);
+		Menu title,info;
+		//Name of game
+		title.setText("Doddle Jump");
+		title.setColor(sf::Color::Black);
+		title.setPosition(sf::Vector2f(100, 80));
+		title.setSize(40);
+		title.show(window);
 	}
 	else
 	{

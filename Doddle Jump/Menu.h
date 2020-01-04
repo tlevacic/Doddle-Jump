@@ -15,6 +15,10 @@ private:
 public:
 	Menu();
 	void setText(std::string txt);
+	void setColor(sf::Color c);
+	void setSize(int s);
+	void setPosition(sf::Vector2f p);
+	void setStyle();
 	void show(sf::RenderWindow *window);
 	~Menu();
 };

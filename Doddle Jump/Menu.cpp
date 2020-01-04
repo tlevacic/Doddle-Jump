@@ -18,10 +18,26 @@ void Menu::setText(std::string txt)
 {
 	t.setFont(font);
 	t.setString(txt);
-	t.setCharacterSize(30);
-	//REPLACE WITH FUNCTION FOR CENTER OF SCREEN
-	t.setPosition(sf::Vector2f(100, 300));
-	t.setFillColor(sf::Color::Red);
+}
+
+void Menu::setColor(sf::Color c)
+{
+	t.setFillColor(c);
+}
+
+void Menu::setSize(int s)
+{
+	t.setCharacterSize(s);
+}
+
+void Menu::setPosition(sf::Vector2f p)
+{
+	t.setPosition(sf::Vector2f(p));
+}
+
+void Menu::setStyle()
+{
+	//NEED TO REPLACE WITH CUSTOM STYLES
 	t.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 
