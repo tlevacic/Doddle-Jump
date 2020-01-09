@@ -12,48 +12,75 @@
 //Game class
 class Game
 {
-
-public:
+//Private Variables
+private:
+	//Window info
 	sf::RenderWindow* window;
-	Player *p;
 	sf::Event e;
-	const int distinct=200;
-	float dy = 0;
-	sf::Sprite backgroud, platform, player;
-public :
-	Point platformPosition[20];
-	int *arr = nullptr;
-	void startGame();
-	bool platformInit = false;
-	int score = 0;
+
+	//Player info
+	Player* p;
+	const int distinct = 200;
+	float dy;
+	int score;
 	int width;
 	int height;
+	bool dead = true;
+
+	//Textures and helpers
+	sf::Sprite backgroud, platform, player;
+	Point platformPosition[20];
+	bool platformInit = false;
+	int* arr = nullptr;
+
+//Private methods
+private:
+	//Window info
 	void initVariables();
 	void initGameWindow();
-	Game(int width,int height);
-	bool isRunning();
-	void update();
-	void makePlayerAlive();
-	void render();
-	void pollEvents();
-	bool checkIfNumberExist(Point* arr, int n, int y);
-	sf::Vector2u getSize() const;
-	void movePlayer();
-	bool dead = true;
-	void checkIfPlayerIsDead();
-	sf::RenderWindow *getWindow();
-	void setBackgound(const Layout* l);
-	void drawplatformPosition();
-	void setPlatform(const Layout* l);
-	void setPlayer(const Layout* l);
-	void displayMainMenu(Menu title, Menu info, Menu scoreText);
-	void createPlatformPosition();
-	~Game();
 
-//Help methods
-private:
+	//Game functionality
+	void startGame();
+	void pollEvents();
+
+	//Player interactions
+	void makePlayerAlive();
+	void movePlayer();
+	void checkIfPlayerIsDead();
+
+	//Platforms
+	void drawplatformPosition();
+	void createPlatformPosition();
+
+	//Menu
+	void displayMainMenu(Menu title, Menu info, Menu scoreText);
+
+	//Helpers
 	bool inRange(int start, int end, int nbr);
 	sf::Vector2f centerOfScreen();
+	bool checkIfNumberExist(Point* arr, int n, int y);
+	sf::Vector2u getSize() const;
+
+//Public methods
+public:
+	//Constructor
+	Game(int width, int height);
+
+	//Game functionality
+	void update();
+	void render();
+
+	//Textures
+	void setBackgound(const Layout* l);
+	void setPlatform(const Layout* l);
+	void setPlayer(const Layout* l);
+
+	//Helpers
+	sf::RenderWindow* getWindow();
+	bool isRunning();
+
+	//Destructor
+	~Game();
 
 
 };
