@@ -148,15 +148,6 @@ void Game::setBackgound(const Layout* l)
 	this->backgroud = l->getSprite();
 }
 
-void Game::drawPlatforms()
-{
-	createPlatformPosition();
-	for (int i = 0; i < 10; i++)
-	{
-		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
-		this->window->draw(platform);
-	}
-}
 
 void Game::drawplatformPosition()
 {
@@ -202,7 +193,7 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	//Info
 	center.y += 100;
 	center.x += 20;
-	info.setText("Space to Start game");
+	info.setText("Left Click to Start game");
 	info.setColor(sf::Color::Black);
 	info.setPosition(center);
 	info.setSize(20);

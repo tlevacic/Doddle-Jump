@@ -43,7 +43,6 @@ public :
 	void checkIfPlayerIsDead();
 	sf::RenderWindow *getWindow();
 	void setBackgound(const Layout* l);
-	void drawPlatforms();
 	void drawplatformPosition();
 	void setPlatform(const Layout* l);
 	void setPlayer(const Layout* l);
