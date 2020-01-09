@@ -57,6 +57,7 @@ void Game::makePlayerAlive()
 	p->playerPosition.y = 0;
 	platformInit = false;
 	dy = 0;
+	p->dy = 0;
 }
 
 //Render game window
@@ -153,6 +154,7 @@ void Game::drawPlatforms()
 		this->window->draw(platform);
 	}
 }
+
 void Game::drawplatformPosition()
 {
 	//Need to add margin between every object

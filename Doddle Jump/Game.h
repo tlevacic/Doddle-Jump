@@ -25,7 +25,7 @@ public :
 	int *arr = nullptr;
 	void startGame();
 	bool platformInit = false;
-	int score = 10;
+	int score = 0;
 	int width;
 	int height;
 	void initVariables();
@@ -39,7 +39,7 @@ public :
 	bool checkIfNumberExist(Point* arr, int n, int y);
 	sf::Vector2u getSize() const;
 	void movePlayer();
-	bool dead = false;
+	bool dead = true;
 	void checkIfPlayerIsDead();
 	sf::RenderWindow *getWindow();
 	void setBackgound(const Layout* l);
