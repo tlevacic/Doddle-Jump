@@ -5,27 +5,49 @@
 #include <iostream>
 #include "Point.h"
 
+//NEED TO ADD SETTERS setScore,setDy ...
+/*
+-
+-
+-
+-
+-
+-
+-
+-
+*/
 class Player
 {
-public:
+//Private variables
+private:
 	int width;
 	int height;
-	int score = 0;
-	float dy;
 	int distinct;
-	Point *platformPosition;
+	Point* platformPosition;
 
+public: int score;
+public: float dy;
+	
+
+//Public variables
 public:
 	Point playerPosition;
-	void playerActions();
+
+//Private methods
+private:
 	void playerJump();
 	void movePlayerScreen();
 	void playerCollision();
 	void movePlayer();
-	int getPlayerScore();
+
+//Public methods
 public:
-	Player(Point *p);
+	void playerActions();
+	int getPlayerScore();
 	void setInfo(int width, int height, int distinct, int deltaY);
+
+	//Constuctor & Destructor
+	Player(Point* p);
 	~Player();
 };
 
