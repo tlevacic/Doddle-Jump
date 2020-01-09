@@ -89,4 +89,5 @@ void Player::setInfo(int width, int height, int distinct, int deltaY)
 }
 Player::~Player()
 {
+
 }

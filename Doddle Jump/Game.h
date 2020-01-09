@@ -31,7 +31,7 @@ private:
 	sf::Sprite backgroud, platform, player;
 	Point platformPosition[20];
 	bool platformInit = false;
-	int* arr = nullptr;
+	int* arr;
 
 //Private methods
 private:
