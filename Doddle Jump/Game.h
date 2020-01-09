@@ -23,8 +23,8 @@ public:
 public :
 	Point platformPosition[20];
 	int *arr = nullptr;
-	bool platformInit = false;
 	void startGame();
+	bool platformInit = false;
 	int score = 10;
 	int width;
 	int height;
@@ -33,25 +33,27 @@ public :
 	Game(int width,int height);
 	bool isRunning();
 	void update();
+	void makePlayerAlive();
 	void render();
 	void pollEvents();
+	bool checkIfNumberExist(Point* arr, int n, int y);
 	sf::Vector2u getSize() const;
 	void movePlayer();
-	void createPlatformPosition();
-	void drawplatformPosition();
-	void movePlatform();
 	bool dead = false;
-	void playerDead();
+	void checkIfPlayerIsDead();
 	sf::RenderWindow *getWindow();
 	void setBackgound(const Layout* l);
+	void drawPlatforms();
+	void drawplatformPosition();
 	void setPlatform(const Layout* l);
 	void setPlayer(const Layout* l);
+	void displayMainMenu(Menu title, Menu info, Menu scoreText);
+	void createPlatformPosition();
 	~Game();
 
 //Help methods
 private:
-	bool checkIfNumberExist(Point *arr,int n,int y);
-	bool inRange(int start,int end, int nbr);
+	bool inRange(int start, int end, int nbr);
 	sf::Vector2f centerOfScreen();
 
 

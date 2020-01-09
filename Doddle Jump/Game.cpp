@@ -3,7 +3,31 @@
 
 using namespace sf;
 
+//Create window with given width / height.
+Game::Game(int width, int height)
+{
+	this->width = width;
+	this->height = height;
+	initVariables();
+	initGameWindow();
+}
 
+//Initialize variables, create Player
+void Game::initVariables()
+{
+	//Set window pointer on NULL (dont needed, just for safe)
+	//NEEDS TO BE DELETED
+	this->window = nullptr;
+	p = new Player(this->platformPosition);
+	p->setInfo(width, height, distinct, dy);
+}
+
+//Creating game window
+void Game::initGameWindow()
+{
+	this->window=new sf::RenderWindow(VideoMode(this->width, this->height), "Doodle Jump!");
+	window->setFramerateLimit(60);
+}
 
 void Game::startGame()
 {
@@ -15,104 +39,54 @@ void Game::startGame()
 	}
 }
 
-void Game::initVariables()
-{
-	//Set window pointer on NULL (dont needed, just for safe)
-	//NEEDS TO BE DELETED
-	this->window = nullptr;
-	p = new Player(this->platformPosition);
-	p->setInfo(width, height, distinct, dy);
-
-	for (int i = 0;i < 10;i++)
-	{
-		platformPosition[i].x = 0;
-		platformPosition[i].y = 0;
-	}
-}
-
-//Creating game window
-void Game::initGameWindow()
-{
-	this->window=new sf::RenderWindow(VideoMode(this->width, this->height), "Doodle Jump!");
-	window->setFramerateLimit(60);
-}
-
-//Create window with given width / height.
-Game::Game(int width, int height)
-{
-	this->width = width;
-	this->height = height;
-	initVariables();
-	initGameWindow();
-}
-
-//Return true if game is stil running
-bool Game::isRunning()
-{
-	return window->isOpen();
-}
 
 //Functionality
 void Game::update()
 {
 	//Every time check if there is pollEvents
-	this->startGame();
-	playerDead();
-	this->pollEvents();
+
+	checkIfPlayerIsDead();
+	pollEvents();
 	p->playerActions();
-	this->movePlatform();
+}
+
+void Game::makePlayerAlive()
+{
+	this->dead = false;
+	p->playerPosition.x = 0;
+	p->playerPosition.y = 0;
+	platformInit = false;
+	dy = 0;
 }
 
 //Render game window
 void Game::render()
 {
+	//Draw background
 	this->window->draw(this->backgroud);
+
+	//Create Menu objects (with custom fonts), for showing text
+	Menu title("fonts/font1.ttf");
+	Menu info("fonts/font1.ttf");
+	Menu scoreText("fonts/font1.ttf");
 
 	if (this->dead)
 	{
-		sf::Vector2f center = this->centerOfScreen();
-		center.x = 50;
-		center.y -= 100;
-
-		Menu title("fonts/font1.ttf");
-		Menu info("fonts/font1.ttf");
-		Menu scoreText("fonts/font1.ttf");
-
-		//Name of game
-		title.setText("Doddle Jump");
-		title.setColor(sf::Color::Black);
-		title.setPosition(center);
-		title.setSize(40);
-		title.show(window);
-
-		//Info
-		center.y += 100;
-		center.x += 20;
-		info.setText("Space to Start game");
-		info.setColor(sf::Color::Black);
-		info.setPosition(center);
-		info.setSize(20);
-		info.show(window);
-
-		//Score
-		if (this->score != 0)
-		{
-			sf::Vector2f center2 = this->centerOfScreen();
-			center2.y = center.y + 80;
-			center2.x -=30;
-			scoreText.setText("Score: " + std::to_string(score));
-			scoreText.setColor(sf::Color::Black);
-			scoreText.setPosition(center2);
-			scoreText.setSize(15);
-			scoreText.show(window);
-		}
+		//
+		displayMainMenu(title,info,scoreText);
 	}
+	//Add score text
+	/*
+	--
+	*/
 	else
 	{
 		player.setPosition(p->playerPosition.x, p->playerPosition.y);
 		this->window->draw(this->player);
-		this->drawplatformPosition();
+		drawplatformPosition();
 	}
+
+
 	window->display();
 }
 
@@ -125,17 +99,12 @@ void Game::pollEvents()
 		case sf::Event::Closed:
 			this->window->close();
 			break;
+		case sf::Event::MouseButtonPressed:
+			makePlayerAlive();
+			break;
 		}
 	}
 }
-
-sf::Vector2u Game::getSize() const
-{
-	return window->getSize();
-}
-
-
-
 
 void Game::movePlayer()
 {
@@ -154,51 +123,10 @@ void Game::movePlayer()
 		else
 			p->playerPosition.x = this->width;
 	}
-
-	//NEED TO DELETE, Just for debuging
-	/*if (Keyboard::isKeyPressed(Keyboard::Space))
-	{
-		playerPosition.y += 7;
-	}*/
-	//Every time, user mofify coordinates, set new player position
-
 	player.setPosition(p->playerPosition.x, p->playerPosition.y);
 }
 
-void Game::drawplatformPosition()
-{
-	//Need to add margin between every object
-	if (!this->platformInit)
-	{
-		this->createPlatformPosition();
-	}
-	for (int i = 0; i < 10; i++)
-	{
-		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
-		window->draw(platform);
-	}
-	
-}
-
-void Game::movePlatform()
-{
-	
-	//Make game harded, constantly moving platforms
-	for (int i = 0;i < 10;i++)
-	{
-		
-		//Move only specific platforms by x asis.
-		/*if (*(arr + i) == i)
-		{
-			if (platformPosition[i].x += 3 + 68 <= this->width)
-				platformPosition[i].x += 3;
-		}*/
-		//Move ALL platforms by Y asis.
-		//platformPosition[i].y += 2;
-	}
-}
-
-void Game::playerDead()
+void Game::checkIfPlayerIsDead()
 {
 	if (p->playerPosition.y > (height)-120)
 	{
@@ -216,6 +144,31 @@ void Game::setBackgound(const Layout* l)
 	this->backgroud = l->getSprite();
 }
 
+void Game::drawPlatforms()
+{
+	createPlatformPosition();
+	for (int i = 0; i < 10; i++)
+	{
+		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
+		this->window->draw(platform);
+	}
+}
+void Game::drawplatformPosition()
+{
+	//Need to add margin between every object
+	if (!this->platformInit)
+	{
+		//PLATFORMS POSITION NEEDS TO SET ONLY ONCE, AT BEGINNING OF GAME
+		this->createPlatformPosition();
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
+		window->draw(platform);
+	}
+
+}
+
 void Game::setPlatform(const Layout* l)
 {
 	this->platform = l->getSprite();
@@ -226,16 +179,30 @@ void Game::setPlayer(const Layout* l)
 	this->player = l->getSprite();
 }
 
-
-
-
-
-Game::~Game()
+//NEED TO REPLACE TEXT WITH TEXT FROM RESOURCES.h FILE
+void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 {
-	//Delete window pointer
-	delete this->window;
-}
+	sf::Vector2f center = this->centerOfScreen();
+	center.x = 50;
+	center.y -= 100;
 
+
+	//Name of game
+	title.setText("Doddle Jump");
+	title.setColor(sf::Color::Black);
+	title.setPosition(center);
+	title.setSize(40);
+	title.show(window);
+
+	//Info
+	center.y += 100;
+	center.x += 20;
+	info.setText("Space to Start game");
+	info.setColor(sf::Color::Black);
+	info.setPosition(center);
+	info.setSize(20);
+	info.show(window);
+}
 
 void Game::createPlatformPosition()
 {
@@ -254,9 +221,7 @@ void Game::createPlatformPosition()
 					break;
 			}
 		}
-
-		std::cout<<"Pozicija je "<<y<<"\n";
-		platformPosition[i].y = y;		
+		platformPosition[i].y = y;
 		platformPosition[i].x = rand() % this->width;
 	}
 	this->platformInit = true;
@@ -265,7 +230,7 @@ void Game::createPlatformPosition()
 bool Game::inRange(int start, int end, int nbr)
 {
 	//Returns true if nubmer IS in range
-	for (int i = start;i < end;i++)
+	for (int i = start; i < end; i++)
 	{
 		if (i == nbr)
 			return true;
@@ -275,17 +240,33 @@ bool Game::inRange(int start, int end, int nbr)
 
 sf::Vector2f Game::centerOfScreen()
 {
-	return Vector2f(width/2,height/2);
+	return Vector2f(width / 2, height / 2);
 }
 
-
-bool Game::checkIfNumberExist(Point *arr, int n, int y)
+bool Game::checkIfNumberExist(Point* arr, int n, int y)
 {
 	//Returns true if 
-	for (int i = 0;i < n;i++)
+	for (int i = 0; i < n; i++)
 	{
-		if (inRange((arr+i)->y,(arr + i)->y + 25, y))
+		if (inRange((arr + i)->y, (arr + i)->y + 25, y))
 			return false;
 	}
 	return true;
+}
+
+sf::Vector2u Game::getSize() const
+{
+	return window->getSize();
+}
+
+//Return true if game is stil running
+bool Game::isRunning()
+{
+	return window->isOpen();
+}
+
+Game::~Game()
+{
+	//Delete window pointer
+	delete this->window;
 }

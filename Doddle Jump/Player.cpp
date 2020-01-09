@@ -8,6 +8,7 @@ void Player::playerActions()
 	playerJump();
 	movePlayerScreen();
 	playerCollision();
+	std::cout << "DY IS " << dy<<"\n";
 }
 
 
