@@ -23,3 +23,9 @@ public:
 	~Layout();
 };
 
+/*
+For use Layout class, need to define:
+1. Layout nameOfObject (adress of game window);
+2. nameOfObject.createGameBackground("filename") || nameOfObject.createSprite("filename");
+3. Connect game with layouts through game class (nameOfObject.getSprite())
+*/

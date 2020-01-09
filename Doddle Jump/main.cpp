@@ -20,6 +20,7 @@ int main()
 	Layout platform(game.getWindow());
 	Layout doodle(game.getWindow());
 
+	//Create layouts textures
 	gameBackground.createGameBackground("images/background.png");
 	platform.createSprite("images/platform.png");
 	doodle.createSprite("images/doodle.png");
@@ -29,8 +30,6 @@ int main()
 	game.setPlatform(&platform);
 	game.setPlayer(&doodle);
 
-	//"images/background.png", "images/platform.png", "images/doodle.png"
-	//game.setSprites();
 
 	//Game loop
 
