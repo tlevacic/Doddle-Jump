@@ -45,7 +45,10 @@ void Player::playerCollision()
 			&& (playerPosition.y + 70 > platformPosition[i].y)
 			&& (playerPosition.y + 70 < platformPosition[i].y + 14)
 			&& (dy > 0))
+		{
 			dy = -10;
+			score += 1;
+		}
 }
 
 void Player::movePlayer()
@@ -65,6 +68,11 @@ void Player::movePlayer()
 		else
 			playerPosition.x = width;
 	}
+}
+
+int Player::getPlayerScore()
+{
+	return this->score;
 }
 
 

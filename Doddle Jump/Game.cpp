@@ -52,6 +52,8 @@ void Game::update()
 
 void Game::makePlayerAlive()
 {
+	score = 0;
+	p->score = 0;
 	this->dead = false;
 	p->playerPosition.x = 0;
 	p->playerPosition.y = 0;
@@ -132,6 +134,7 @@ void Game::checkIfPlayerIsDead()
 	if (p->playerPosition.y > (height)-120)
 	{
 		this->dead = true;
+		score = p->getPlayerScore();
 	}
 }
 
@@ -204,6 +207,17 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	info.setPosition(center);
 	info.setSize(20);
 	info.show(window);
+	if (score != 0)
+	{
+		sf::Vector2f center2 = this->centerOfScreen();
+		center2.y = center.y + 80;
+		center2.x -= 30;
+		scoreText.setText("Score: " + std::to_string(score));
+		scoreText.setColor(sf::Color::Black);
+		scoreText.setPosition(center2);
+		scoreText.setSize(15);
+		scoreText.show(window);
+	}
 }
 
 void Game::createPlatformPosition()

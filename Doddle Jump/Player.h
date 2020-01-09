@@ -10,6 +10,7 @@ class Player
 public:
 	int width;
 	int height;
+	int score = 0;
 	float dy;
 	int distinct;
 	Point *platformPosition;
@@ -21,6 +22,7 @@ public:
 	void movePlayerScreen();
 	void playerCollision();
 	void movePlayer();
+	int getPlayerScore();
 public:
 	Player(Point *p);
 	void setInfo(int width, int height, int distinct, int deltaY);
