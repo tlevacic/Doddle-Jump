@@ -46,13 +46,16 @@ public:
 	void render();
 	void pollEvents();
 	sf::Vector2u getSize() const;
-	void setSprites(Layout * const l);
 	void movePlayer();
 	void createPlatformPosition();
 	void drawplatformPosition();
 	void movePlatform();
 	bool dead = false;
 	void playerDead();
+	sf::RenderWindow *getWindow();
+	void setBackgound(const Layout* l);
+	void setPlatform(const Layout* l);
+	void setPlayer(const Layout* l);
 
 	~Game();
 

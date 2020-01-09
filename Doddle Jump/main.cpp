@@ -15,12 +15,22 @@ int main()
 	//Create game window
 	Game game(400,560);
 
-	//Create layout for game
-	Layout *l=new Layout();
+	//Create layouts for game
+	Layout gameBackground(game.getWindow());
+	Layout platform(game.getWindow());
+	Layout doodle(game.getWindow());
 
+	gameBackground.createGameBackground("images/background.png");
+	platform.createSprite("images/platform.png");
+	doodle.createSprite("images/doodle.png");
 
-	l->setSprites("images/background.png", "images/platform.png", "images/doodle.png");
-	game.setSprites(l);
+	//Connect layouts objects with game layouts
+	game.setBackgound(&gameBackground);
+	game.setPlatform(&platform);
+	game.setPlayer(&doodle);
+
+	//"images/background.png", "images/platform.png", "images/doodle.png"
+	//game.setSprites();
 
 	//Game loop
 

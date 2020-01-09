@@ -136,12 +136,6 @@ sf::Vector2u Game::getSize() const
 	return window->getSize();
 }
 
-void Game::setSprites(Layout * const l)
-{
-	this->backgroud = l->getBackground();
-	this->platform = l->getPlatform();
-	this->player = l->getPlayer();
-}
 
 
 
@@ -212,6 +206,26 @@ void Game::playerDead()
 	{
 		this->dead = true;
 	}
+}
+
+sf::RenderWindow* Game::getWindow()
+{
+	return window;
+}
+
+void Game::setBackgound(const Layout* l)
+{
+	this->backgroud = l->getSprite();
+}
+
+void Game::setPlatform(const Layout* l)
+{
+	this->platform = l->getSprite();
+}
+
+void Game::setPlayer(const Layout* l)
+{
+	this->player = l->getSprite();
 }
 
 
