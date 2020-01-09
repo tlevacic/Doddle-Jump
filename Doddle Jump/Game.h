@@ -12,34 +12,24 @@
 //Game class
 class Game
 {
-//Private variables
-	////
 
-	public:
-	Player *p;
+public:
 	sf::RenderWindow* window;
+	Player *p;
 	sf::Event e;
 	const int distinct=200;
 	float dy = 0;
 	sf::Sprite backgroud, platform, player;
+public :
 	Point platformPosition[20];
 	int *arr = nullptr;
 	bool platformInit = false;
 	void startGame();
 	int score = 10;
-//Public variables
-public:
 	int width;
 	int height;
-
-//Private methods
 	void initVariables();
 	void initGameWindow();
-private:
-
-
-//Public methods
-public:
 	Game(int width,int height);
 	bool isRunning();
 	void update();
@@ -56,7 +46,6 @@ public:
 	void setBackgound(const Layout* l);
 	void setPlatform(const Layout* l);
 	void setPlayer(const Layout* l);
-
 	~Game();
 
 //Help methods

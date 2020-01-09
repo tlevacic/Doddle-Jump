@@ -23,6 +23,7 @@ public:
 	void movePlayer();
 public:
 	Player(Point *p);
+	void setInfo(int width, int height, int distinct, int deltaY);
 	~Player();
 };
 

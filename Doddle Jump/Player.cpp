@@ -67,9 +67,16 @@ void Player::movePlayer()
 }
 
 
-Player::Player(Point *p)
+Player::Player(Point* p)
 {
 	this->platformPosition = p;
+}
+void Player::setInfo(int width, int height, int distinct, int deltaY)
+{
+	this->width = width;
+	this->height = height;
+	this->distinct = distinct;
+	this->dy = deltaY;
 }
 Player::~Player()
 {

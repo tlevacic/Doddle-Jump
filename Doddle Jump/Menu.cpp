@@ -5,9 +5,9 @@
 #include <string>
 
 
-Menu::Menu()
+Menu::Menu(std::string s)
 {
-	if (!font.loadFromFile("fonts/font1.ttf"))
+	if (!font.loadFromFile(s))
 	{
 		std::cout << "Font cant be loaded";
 	}

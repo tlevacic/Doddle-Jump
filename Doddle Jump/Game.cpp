@@ -21,12 +21,7 @@ void Game::initVariables()
 	//NEEDS TO BE DELETED
 	this->window = nullptr;
 	p = new Player(this->platformPosition);
-	p->playerPosition.x = 0;
-	p->playerPosition.y = 0;
-	p->width = this->width;
-	p->height = this->height;
-	p->distinct = this->distinct;
-	p->dy = this->dy;
+	p->setInfo(width, height, distinct, dy);
 
 	for (int i = 0;i < 10;i++)
 	{
@@ -79,7 +74,10 @@ void Game::render()
 		center.x = 50;
 		center.y -= 100;
 
-		Menu title,info, scoreText;
+		Menu title("fonts/font1.ttf");
+		Menu info("fonts/font1.ttf");
+		Menu scoreText("fonts/font1.ttf");
+
 		//Name of game
 		title.setText("Doddle Jump");
 		title.setColor(sf::Color::Black);

@@ -13,7 +13,7 @@ private:
 	sf::Font font;
 	sf::Text t;
 public:
-	Menu();
+	Menu(std::string s);
 	void setText(std::string txt);
 	void setColor(sf::Color c);
 	void setSize(int s);
@@ -22,4 +22,5 @@ public:
 	void show(sf::RenderWindow *window);
 	~Menu();
 };
+
 
