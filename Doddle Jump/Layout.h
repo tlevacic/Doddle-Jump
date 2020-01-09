@@ -12,15 +12,14 @@ class Layout
 private:
 	sf::Vector2u TextureSize;  //Added to store texture size.
 	sf::Vector2u WindowSize;   //Added to store window size.
-	sf::Texture backG, plat, play;
-	sf::Sprite background, platform, player;
+	sf::Texture texture;
+	sf::Sprite sprite;
 
 public:
-	Layout();
-	int setSprites(std::string s1, std::string s2, std::string s3);
-	sf::Sprite getBackground() const;
-	sf::Sprite getPlatform() const;
-	sf::Sprite getPlayer() const;
+	Layout(sf::RenderWindow *window);
+	int createGameBackground(std::string s);
+	int createSprite(std::string s);
+	sf::Sprite getSprite() const;
 	~Layout();
 };
 

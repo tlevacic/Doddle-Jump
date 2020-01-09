@@ -17,6 +17,8 @@ int main()
 
 	//Create layout for game
 	Layout *l=new Layout();
+
+
 	l->setSprites("images/background.png", "images/platform.png", "images/doodle.png");
 	game.setSprites(l);
 
