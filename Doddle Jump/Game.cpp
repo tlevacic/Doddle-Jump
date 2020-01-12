@@ -55,8 +55,8 @@ void Game::makePlayerAlive()
 	p->score = 0;
 	this->dead = false;
 	Vector2f center = centerOfScreen();
-	p->playerPosition.x = center.x - 50;
-	p->playerPosition.y = center.y;
+	p->playerPosition.x = platformPosition[0].x;
+	p->playerPosition.y = platformPosition[0].y - 70;
 	platformInit = false;
 	dy = 0;
 	p->dy = 0;
@@ -124,7 +124,7 @@ void Game::movePlayer()
 
 void Game::checkIfPlayerIsDead()
 {
-	if (p->playerPosition.y > (height)-120)
+	if (p->playerPosition.y + 70 > height)
 	{
 		this->dead = true;
 		score = p->getPlayerScore();
@@ -233,13 +233,16 @@ void Game::createPlatformPosition2()
 	int max = validHeight; //Height of platform
 	int range = max - min + 1;
 	int num = rand() % range + min;
-
-	for (int i = 0; i < 10; i++)
+	Vector2f center = centerOfScreen();
+	platformPosition[0].x = center.y- 68; //Minus width of platform
+	platformPosition[0].y = height-13;
+	for (int i = 1; i < 10; i++)
 	{
 		platformPosition[i].y = num;
 		num += 80;
 		platformPosition[i].x = rand() % (width -50);
 	}
+
 	this->platformInit = true;
 }
 
