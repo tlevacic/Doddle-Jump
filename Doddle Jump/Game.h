@@ -51,6 +51,7 @@ private:
 	//Platforms
 	void drawplatformPosition();
 	void createPlatformPosition();
+	void createPlatformPosition2();
 
 	//Menu
 	void displayMainMenu(Menu title, Menu info, Menu scoreText);

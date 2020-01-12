@@ -8,7 +8,6 @@ void Player::playerActions()
 	playerJump();
 	movePlayerScreen();
 	playerCollision();
-	std::cout << "DY IS " << dy<<"\n";
 }
 
 
@@ -20,6 +19,8 @@ void Player::playerJump()
 
 void Player::movePlayerScreen()
 {
+	int num = 0;
+
 	if (playerPosition.y <distinct)
 		for (int i = 0; i < 10; i++)
 		{
@@ -27,10 +28,11 @@ void Player::movePlayerScreen()
 			platformPosition[i].y = platformPosition[i].y - dy;
 
 
-			if (platformPosition[i].y > height)
+			if (platformPosition[i].y > height-13)
 			{
-				platformPosition[i].y = 0;
-				platformPosition[i].x = rand() % width;
+				platformPosition[i].y = num;
+				num += 50;
+				platformPosition[i].x = rand() % (width -50);
 			}
 		}
 }
@@ -56,15 +58,15 @@ void Player::movePlayer()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 
-		if ((playerPosition.x += 3) + 50 <= width)
-			playerPosition.x += 3;
+		if ((playerPosition.x += 5) + 50 <= width)
+			playerPosition.x += 5;
 		else
 			playerPosition.x = -20;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		if ((playerPosition.x -= 3) > 0)
-			playerPosition.x -= 3;
+		if ((playerPosition.x -= 5) > 0)
+			playerPosition.x -= 5;
 		else
 			playerPosition.x = width;
 	}

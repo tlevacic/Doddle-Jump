@@ -33,9 +33,9 @@ void Game::startGame()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		std::cout << "First" << dead << "\n";
+		
 		this->dead = false;
-		std::cout << dead << "\n";
+		
 	}
 }
 
@@ -44,7 +44,6 @@ void Game::startGame()
 void Game::update()
 {
 	//Every time check if there is pollEvents
-
 	checkIfPlayerIsDead();
 	pollEvents();
 	p->playerActions();
@@ -55,8 +54,9 @@ void Game::makePlayerAlive()
 	score = 0;
 	p->score = 0;
 	this->dead = false;
-	p->playerPosition.x = 0;
-	p->playerPosition.y = 0;
+	Vector2f center = centerOfScreen();
+	p->playerPosition.x = center.x - 50;
+	p->playerPosition.y = center.y;
 	platformInit = false;
 	dy = 0;
 	p->dy = 0;
@@ -74,14 +74,7 @@ void Game::render()
 	Menu scoreText("fonts/font1.ttf");
 
 	if (this->dead)
-	{
-		//
 		displayMainMenu(title,info,scoreText);
-	}
-	//Add score text
-	/*
-	--
-	*/
 	else
 	{
 		player.setPosition(p->playerPosition.x, p->playerPosition.y);
@@ -151,11 +144,10 @@ void Game::setBackgound(const Layout* l)
 
 void Game::drawplatformPosition()
 {
-	//Need to add margin between every object
 	if (!this->platformInit)
 	{
 		//PLATFORMS POSITION NEEDS TO SET ONLY ONCE, AT BEGINNING OF GAME
-		this->createPlatformPosition();
+		this->createPlatformPosition2();
 	}
 	for (int i = 0; i < 10; i++)
 	{
@@ -234,6 +226,23 @@ void Game::createPlatformPosition()
 	this->platformInit = true;
 }
 
+void Game::createPlatformPosition2()
+{
+	int min = 0;
+	int validHeight = height / 10 - 13;
+	int max = validHeight; //Height of platform
+	int range = max - min + 1;
+	int num = rand() % range + min;
+
+	for (int i = 0; i < 10; i++)
+	{
+		platformPosition[i].y = num;
+		num += 80;
+		platformPosition[i].x = rand() % (width -50);
+	}
+	this->platformInit = true;
+}
+
 bool Game::inRange(int start, int end, int nbr)
 {
 	//Returns true if nubmer IS in range
@@ -255,6 +264,7 @@ bool Game::checkIfNumberExist(Point* arr, int n, int y)
 	//Returns true if 
 	for (int i = 0; i < n; i++)
 	{
+		std::cout << ((arr + i)->y)<<"\n";
 		if (inRange((arr + i)->y, (arr + i)->y + 25, y))
 			return false;
 	}
