@@ -2,21 +2,11 @@
 Game written in C++ &amp; SFML
 Version of "Doodle Jump" game.
 
-1. Download SFML 2.5.1 from this link https://www.sfml-dev.org/download/sfml/2.5.1/
-2. Put SFML on path: C:\SFML-2.5.1
-3. Open project, in project properties set:
-        - C/C++ / General (All Configurations)- Additional Include Directories : C:\SFML-2.5.1\include
-        - Linker/General (All Congifurations) - Additional Library Directories: C:\SFML-2.5.1\lib
-        - Linker/Input (Debug) -Additional Dependencies : sfml-graphics-d.lib 
-                                                          sfml-window-d.lib
-                                                          sfml-system-d.lib
-                                                          sfml-network-d.lib
-                                                          sfml-audio-d.lib
-         - Linker/Input (Release) -Additional Dependencies : sfml-graphics.lib
-                                                             sfml-window.lib
-                                                             sfml-system.lib
-                                                             sfml-network.lib
-                                                             sfml-audio.lib
+1. Clone repository
+2. Open project in visual studio
+3. Set build option like in this picture:
+<img src="https://user-images.githubusercontent.com/56079123/82116928-777afe00-976d-11ea-9785-4ddce41234ac.jpg">
+
                                                              
 
 Game loop
