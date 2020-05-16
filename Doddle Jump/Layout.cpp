@@ -12,8 +12,6 @@ Layout::Layout(sf::RenderWindow* window)
 
 int Layout::createGameBackground(std::string s)
 {
-	//First, need to load png from files into textures
-	//Second, need to setTexture to sprite
 	if (!texture.loadFromFile(s))
 	{
 		return -1;

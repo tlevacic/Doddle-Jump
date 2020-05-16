@@ -36,7 +36,6 @@ void Menu::setPosition(sf::Vector2f p)
 
 void Menu::setStyle()
 {
-	//NEED TO REPLACE WITH CUSTOM STYLES
 	t.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 

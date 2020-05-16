@@ -5,17 +5,6 @@
 #include <iostream>
 #include "Point.h"
 
-//NEED TO ADD SETTERS setScore,setDy ...
-/*
--
--
--
--
--
--
--
--
-*/
 class Player
 {
 //Private variables

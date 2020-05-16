@@ -23,11 +23,4 @@ public:
 	~Menu();
 };
 
-/*
-For use Menu class, need to define:
-1. Create object - Menu nameOfObject("pathToFontFile");
-2. Add props ( nameOfObject.setText("test1") .....)
-3. Show menu on custom window (nameOfObject.show(this->window));
-*/
-
 

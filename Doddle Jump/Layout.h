@@ -10,8 +10,8 @@
 class Layout
 {
 private:
-	sf::Vector2u TextureSize;  //Added to store texture size.
-	sf::Vector2u WindowSize;   //Added to store window size.
+	sf::Vector2u TextureSize;  
+	sf::Vector2u WindowSize;  
 	sf::Texture texture;
 	sf::Sprite sprite;
 
@@ -22,10 +22,3 @@ public:
 	sf::Sprite getSprite() const;
 	~Layout();
 };
-
-/*
-For use Layout class, need to define:
-1. Layout nameOfObject (adress of game window);
-2. nameOfObject.createGameBackground("filename") || nameOfObject.createSprite("filename");
-3. Connect game with layouts through game class (nameOfObject.getSprite())
-*/

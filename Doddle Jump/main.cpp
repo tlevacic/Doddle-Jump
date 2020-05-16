@@ -9,9 +9,6 @@
 using namespace sf;
 int main()
 {
-
-
-
 	//Create game window
 	Game game(400,560);
 

@@ -15,8 +15,6 @@ Game::Game(int width, int height)
 //Initialize variables, create Player
 void Game::initVariables()
 {
-	//Set window pointer on NULL (dont needed, just for safe)
-	//NEEDS TO BE DELETED
 	this->window = nullptr;
 	p = new Player(this->platformPosition);
 	p->setInfo(width, height, distinct, dy);
@@ -68,7 +66,6 @@ void Game::render()
 	//Draw background
 	this->window->draw(this->backgroud);
 
-	//Create Menu objects (with custom fonts), for showing text
 	Menu title("fonts/font1.ttf");
 	Menu info("fonts/font1.ttf");
 	Menu scoreText("fonts/font1.ttf");
@@ -146,7 +143,6 @@ void Game::drawplatformPosition()
 {
 	if (!this->platformInit)
 	{
-		//PLATFORMS POSITION NEEDS TO SET ONLY ONCE, AT BEGINNING OF GAME
 		this->createPlatformPosition2();
 	}
 	for (int i = 0; i < 10; i++)
@@ -167,7 +163,6 @@ void Game::setPlayer(const Layout* l)
 	this->player = l->getSprite();
 }
 
-//NEED TO REPLACE TEXT WITH TEXT FROM RESOURCES.h FILE
 void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 {
 	sf::Vector2f center = this->centerOfScreen();
@@ -209,7 +204,7 @@ void Game::createPlatformPosition()
 	{
 		//First- create random number (height of platform)
 		int y = rand() % this->height;
-		//Second- check if another platform is to close
+		//Second- check if another platform is too close
 		if (!checkIfNumberExist(platformPosition, (sizeof(platformPosition) / sizeof(*platformPosition)), y))
 			//Look another number
 		{
@@ -264,10 +259,8 @@ sf::Vector2f Game::centerOfScreen()
 
 bool Game::checkIfNumberExist(Point* arr, int n, int y)
 {
-	//Returns true if 
 	for (int i = 0; i < n; i++)
 	{
-		std::cout << ((arr + i)->y)<<"\n";
 		if (inRange((arr + i)->y, (arr + i)->y + 25, y))
 			return false;
 	}
