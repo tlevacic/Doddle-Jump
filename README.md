@@ -6,7 +6,8 @@ Version of "Doodle Jump" game.
 2. Open project in visual studio
 3. Set build option like in this picture:
 <img src="https://user-images.githubusercontent.com/56079123/82116928-777afe00-976d-11ea-9785-4ddce41234ac.jpg">
-
+4.F5
+5.Play game
                                                              
 
 Game loop
