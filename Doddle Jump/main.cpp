@@ -18,9 +18,9 @@ int main()
 	Layout doodle(game.getWindow());
 
 	//Create layouts textures
-	gameBackground.createGameBackground("images/background.png");
-	platform.createSprite("images/platform.png");
-	doodle.createSprite("images/doodle.png");
+	gameBackground.createGameBackground(BACKGROUND_URL);
+	platform.createSprite(PLATFORM_URL);
+	doodle.createSprite(DOODLE_URL);
 
 	//Connect layouts objects with game layouts
 	game.setBackgound(&gameBackground);

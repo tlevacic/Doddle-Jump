@@ -9,7 +9,7 @@ Menu::Menu(std::string s)
 {
 	if (!font.loadFromFile(s))
 	{
-		std::cout << "Font cant be loaded";
+		std::cout << ERROR_FONTS;
 	}
 }
 

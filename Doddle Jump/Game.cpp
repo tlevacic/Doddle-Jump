@@ -23,7 +23,7 @@ void Game::initVariables()
 //Creating game window
 void Game::initGameWindow()
 {
-	this->window=new sf::RenderWindow(VideoMode(this->width, this->height), "Doodle Jump!");
+	this->window=new sf::RenderWindow(VideoMode(this->width, this->height), PROJECT_TITLE);
 	window->setFramerateLimit(60);
 }
 
@@ -66,9 +66,9 @@ void Game::render()
 	//Draw background
 	this->window->draw(this->backgroud);
 
-	Menu title("fonts/font1.ttf");
-	Menu info("fonts/font1.ttf");
-	Menu scoreText("fonts/font1.ttf");
+	Menu title(FONTS_PATH);
+	Menu info(FONTS_PATH);
+	Menu scoreText(FONTS_PATH);
 
 	if (this->dead)
 		displayMainMenu(title,info,scoreText);
@@ -152,7 +152,7 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 
 
 	//Name of game
-	title.setText("Doddle Jump");
+	title.setText(PROJECT_TITLE);
 	title.setColor(sf::Color::Black);
 	title.setPosition(center);
 	title.setSize(cSizeOfText40);
@@ -161,7 +161,7 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	//Info
 	center.y += cMoveTextY;
 	center.x += cMoveTextX;
-	info.setText("Left Click to Start game");
+	info.setText(START_GAME);
 	info.setColor(sf::Color::Black);
 	info.setPosition(center);
 	info.setSize(cSizeOfText20);
@@ -171,7 +171,7 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 		sf::Vector2f center2 = this->centerOfScreen();
 		center2.y = center.y + cMoveScoreTextY;
 		center2.x -= cMoveScoreTextX;
-		scoreText.setText("Score: " + std::to_string(score));
+		scoreText.setText(SCORE + std::to_string(score));
 		scoreText.setColor(sf::Color::Black);
 		scoreText.setPosition(center2);
 		scoreText.setSize(15);

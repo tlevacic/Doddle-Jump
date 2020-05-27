@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include <SFML/Graphics.hpp>
 #include <time.h>
+#include "strings.h"
 #include <iostream>
 #include <string>
 

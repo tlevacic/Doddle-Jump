@@ -6,7 +6,7 @@
 #include "Layout.h"
 #include "Point.h"
 #include "Player.h"
-#include "resource.h"
+#include "strings.h"
 #include "Menu.h"
 
 #define NumOfplatformPosition 10
