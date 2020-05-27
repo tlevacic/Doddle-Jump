@@ -9,6 +9,8 @@
 #include "resource.h"
 #include "Menu.h"
 
+#define NumOfplatformPosition 10
+
 //Game class
 class Game
 {
@@ -17,6 +19,20 @@ private:
 	//Window info
 	sf::RenderWindow* window;
 	sf::Event e;
+
+	int cPlatformWidth = 70;
+	int cPlayerWidth = 50;
+	int cPlayerMove = 3;
+	int cPlatformHeight = 14;
+	int cLeftSizeOfScreen = 20;
+	int cNumberOfPlatforms = 10;
+	int cDistancePlatforms = 80;
+	int cMoveTextY = 100;
+	int cMoveTextX = 20;
+	int cSizeOfText20 = 20;
+	int cSizeOfText40 = 40;
+	int cMoveScoreTextY = 80;
+	int cMoveScoreTextX = 30;
 
 	//Player info
 	Player* p;
@@ -29,9 +45,8 @@ private:
 
 	//Textures and helpers
 	sf::Sprite backgroud, platform, player;
-	Point platformPosition[10];
+	Point platformPosition[NumOfplatformPosition];
 	bool platformInit = false;
-	int* arr;
 
 //Private methods
 private:
@@ -45,7 +60,6 @@ private:
 
 	//Player interactions
 	void makePlayerAlive();
-	void movePlayer();
 	void checkIfPlayerIsDead();
 
 	//Platforms

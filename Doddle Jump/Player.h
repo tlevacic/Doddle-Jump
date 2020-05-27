@@ -13,6 +13,16 @@ private:
 	int height;
 	int distinct;
 	Point* platformPosition;
+	float cDy = 0.3;
+	int cNumberOfPlatforms = 10;
+	int cPlayerWidth = 50;
+	int cPlatformWidth = 70;
+	int cMovePlayer = 5;
+	int cLeftSizeOfScreen = 20;
+	int cAddScoreValue = 1;
+	int cBottomPlatformDistance = 13;
+	int cAddHeightToPlayer = 50;
+	int cPlatformHeight = 14;
 
 public: int score;
 public: float dy;

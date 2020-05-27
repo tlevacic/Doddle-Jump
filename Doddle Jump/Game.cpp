@@ -54,7 +54,7 @@ void Game::makePlayerAlive()
 	this->dead = false;
 	Vector2f center = centerOfScreen();
 	p->playerPosition.x = platformPosition[0].x;
-	p->playerPosition.y = platformPosition[0].y - 70;
+	p->playerPosition.y = platformPosition[0].y - cPlatformWidth;
 	platformInit = false;
 	dy = 0;
 	p->dy = 0;
@@ -99,29 +99,10 @@ void Game::pollEvents()
 	}
 }
 
-void Game::movePlayer()
-{
-	if (Keyboard::isKeyPressed(Keyboard::Right))
-	{
-		
-		if ((p->playerPosition.x += 3) + 50 <= this->width)
-			p->playerPosition.x += 3;
-		else
-			p->playerPosition.x = -20;
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Left))
-	{
-		if ((p->playerPosition.x -= 3) > 0)
-			p->playerPosition.x -= 3;
-		else
-			p->playerPosition.x = this->width;
-	}
-	player.setPosition(p->playerPosition.x, p->playerPosition.y);
-}
 
 void Game::checkIfPlayerIsDead()
 {
-	if (p->playerPosition.y + 70 > height)
+	if (p->playerPosition.y + cPlatformWidth > height)
 	{
 		this->dead = true;
 		score = p->getPlayerScore();
@@ -145,7 +126,7 @@ void Game::drawplatformPosition()
 	{
 		this->createPlatformPosition2();
 	}
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < cNumberOfPlatforms; i++)
 	{
 		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
 		window->draw(platform);
@@ -174,22 +155,22 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	title.setText("Doddle Jump");
 	title.setColor(sf::Color::Black);
 	title.setPosition(center);
-	title.setSize(40);
+	title.setSize(cSizeOfText40);
 	title.show(window);
 
 	//Info
-	center.y += 100;
-	center.x += 20;
+	center.y += cMoveTextY;
+	center.x += cMoveTextX;
 	info.setText("Left Click to Start game");
 	info.setColor(sf::Color::Black);
 	info.setPosition(center);
-	info.setSize(20);
+	info.setSize(cSizeOfText20);
 	info.show(window);
 	if (score != 0)
 	{
 		sf::Vector2f center2 = this->centerOfScreen();
-		center2.y = center.y + 80;
-		center2.x -= 30;
+		center2.y = center.y + cMoveScoreTextY;
+		center2.x -= cMoveScoreTextX;
 		scoreText.setText("Score: " + std::to_string(score));
 		scoreText.setColor(sf::Color::Black);
 		scoreText.setPosition(center2);
@@ -201,18 +182,18 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 void Game::createPlatformPosition2()
 {
 	int min = 0;
-	int validHeight = height / 10 - 13;
+	int validHeight = height / cNumberOfPlatforms - cPlatformHeight;
 	int max = validHeight; //Height of platform
 	int range = max - min + 1;
 	int num = rand() % range + min;
 	Vector2f center = centerOfScreen();
-	platformPosition[0].x = center.y- 68; //Minus width of platform
-	platformPosition[0].y = height-13;
-	for (int i = 1; i < 10; i++)
+	platformPosition[0].x = center.y- cPlatformWidth; //Minus width of platform
+	platformPosition[0].y = height- cPlatformHeight;
+	for (int i = 1; i < cNumberOfPlatforms; i++)
 	{
 		platformPosition[i].y = num;
-		num += 80;
-		platformPosition[i].x = rand() % (width -50);
+		num += cDistancePlatforms;
+		platformPosition[i].x = rand() % (width - cPlayerWidth);
 	}
 
 	this->platformInit = true;
@@ -228,12 +209,10 @@ bool Game::inRange(int start, int end, int nbr)
 	}
 	return false;
 }
-
 sf::Vector2f Game::centerOfScreen()
 {
 	return Vector2f(width / 2, height / 2);
 }
-
 bool Game::checkIfNumberExist(Point* arr, int n, int y)
 {
 	for (int i = 0; i < n; i++)
@@ -243,21 +222,16 @@ bool Game::checkIfNumberExist(Point* arr, int n, int y)
 	}
 	return true;
 }
-
 sf::Vector2u Game::getSize() const
 {
 	return window->getSize();
 }
-
-//Return true if game is stil running
 bool Game::isRunning()
 {
 	return window->isOpen();
 }
-
 Game::~Game()
 {
-	//Delete window pointer
 	delete this->window;
 	delete this->p;
 }
