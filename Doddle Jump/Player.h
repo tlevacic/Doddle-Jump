@@ -13,16 +13,16 @@ private:
 	int height;
 	int distinct;
 	Point* platformPosition;
-	float cDy = 0.3;
-	int cNumberOfPlatforms = 10;
-	int cPlayerWidth = 50;
-	int cPlatformWidth = 70;
-	int cMovePlayer = 5;
-	int cLeftSizeOfScreen = 20;
-	int cAddScoreValue = 1;
-	int cBottomPlatformDistance = 13;
-	int cAddHeightToPlayer = 50;
-	int cPlatformHeight = 14;
+	const float cDy = 0.3;
+	const int cNumberOfPlatforms = 10;
+	const int cPlayerWidth = 50;
+	const int cPlatformWidth = 70;
+	const int cMovePlayer = 5;
+	const int cLeftSizeOfScreen = 20;
+	const int cAddScoreValue = 1;
+	const int cBottomPlatformDistance = 13;
+	const int cAddHeightToPlayer = 50;
+	const int cPlatformHeight = 14;
 
 public: int score;
 public: float dy;

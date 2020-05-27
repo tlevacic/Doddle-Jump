@@ -20,19 +20,19 @@ private:
 	sf::RenderWindow* window;
 	sf::Event e;
 
-	int cPlatformWidth = 70;
-	int cPlayerWidth = 50;
-	int cPlayerMove = 3;
-	int cPlatformHeight = 14;
-	int cLeftSizeOfScreen = 20;
-	int cNumberOfPlatforms = 10;
-	int cDistancePlatforms = 80;
-	int cMoveTextY = 100;
-	int cMoveTextX = 20;
-	int cSizeOfText20 = 20;
-	int cSizeOfText40 = 40;
-	int cMoveScoreTextY = 80;
-	int cMoveScoreTextX = 30;
+	const int cPlatformWidth = 70;
+	const int cPlayerWidth = 50;
+	const int cPlayerMove = 3;
+	const int cPlatformHeight = 14;
+	const int cLeftSizeOfScreen = 20;
+	const int cNumberOfPlatforms = 10;
+	const int cDistancePlatforms = 80;
+	const int cMoveTextY = 100;
+	const int cMoveTextX = 20;
+	const int cSizeOfText20 = 20;
+	const int cSizeOfText40 = 40;
+	const int cMoveScoreTextY = 80;
+	const int cMoveScoreTextX = 30;
 
 	//Player info
 	Player* p;
