@@ -6,8 +6,5 @@ class Point
 {
 public:
 	int x, y;
-public:
-	Point();
-	~Point();
 };
 

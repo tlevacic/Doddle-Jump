@@ -20,5 +20,4 @@ public:
 	int createGameBackground(std::string s);
 	int createSprite(std::string s);
 	sf::Sprite getSprite() const;
-	~Layout();
 };

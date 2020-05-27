@@ -37,6 +37,5 @@ public:
 
 	//Constuctor & Destructor
 	Player(Point* p);
-	~Player();
 };
 

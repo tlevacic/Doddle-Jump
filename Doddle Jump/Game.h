@@ -29,7 +29,7 @@ private:
 
 	//Textures and helpers
 	sf::Sprite backgroud, platform, player;
-	Point platformPosition[20];
+	Point platformPosition[10];
 	bool platformInit = false;
 	int* arr;
 
@@ -50,7 +50,6 @@ private:
 
 	//Platforms
 	void drawplatformPosition();
-	void createPlatformPosition();
 	void createPlatformPosition2();
 
 	//Menu

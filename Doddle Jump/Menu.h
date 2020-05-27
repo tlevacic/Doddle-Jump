@@ -20,7 +20,6 @@ public:
 	void setPosition(sf::Vector2f p);
 	void setStyle();
 	void show(sf::RenderWindow *window);
-	~Menu();
 };
 
 

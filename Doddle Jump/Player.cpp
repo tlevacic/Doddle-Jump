@@ -89,7 +89,3 @@ void Player::setInfo(int width, int height, int distinct, int deltaY)
 	this->distinct = distinct;
 	this->dy = deltaY;
 }
-Player::~Player()
-{
-
-}

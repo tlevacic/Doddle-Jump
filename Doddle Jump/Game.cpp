@@ -198,29 +198,6 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	}
 }
 
-void Game::createPlatformPosition()
-{
-	for (int i = 0; i < 10; i++)
-	{
-		//First- create random number (height of platform)
-		int y = rand() % this->height;
-		//Second- check if another platform is too close
-		if (!checkIfNumberExist(platformPosition, (sizeof(platformPosition) / sizeof(*platformPosition)), y))
-			//Look another number
-		{
-			while (1)
-			{
-				y = rand() % this->height;
-				if (checkIfNumberExist(platformPosition, (sizeof(platformPosition) / sizeof(*platformPosition)), y))
-					break;
-			}
-		}
-		platformPosition[i].y = y;
-		platformPosition[i].x = rand() % this->width;
-	}
-	this->platformInit = true;
-}
-
 void Game::createPlatformPosition2()
 {
 	int min = 0;
@@ -282,4 +259,5 @@ Game::~Game()
 {
 	//Delete window pointer
 	delete this->window;
+	delete this->p;
 }

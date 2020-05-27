@@ -46,8 +46,3 @@ sf::Sprite Layout::getSprite() const
 	return this->sprite;
 }
 
-
-
-Layout::~Layout()
-{
-}

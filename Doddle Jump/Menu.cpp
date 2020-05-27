@@ -44,7 +44,3 @@ void Menu::show(sf::RenderWindow *window)
 	window->draw(t);
 }
 
-
-Menu::~Menu()
-{
-}
