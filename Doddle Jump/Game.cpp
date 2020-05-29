@@ -3,37 +3,23 @@
 
 using namespace sf;
 
+const int NumberOfPlatforms = 10;
+
 //Create window with given width / height.
-Game::Game(int width, int height)
+Game::Game(int width, int height) : width(width), height(height),
+window(VideoMode(width, height), PROJECT_TITLE),platformPosition(NumberOfPlatforms),p(platformPosition)
 {
-	this->width = width;
-	this->height = height;
-	initVariables();
-	initGameWindow();
-}
-
-//Initialize variables, create Player
-void Game::initVariables()
-{
-	this->window = nullptr;
-	p = new Player(this->platformPosition);
-	p->setInfo(width, height, distinct, dy);
-}
-
-//Creating game window
-void Game::initGameWindow()
-{
-	this->window=new sf::RenderWindow(VideoMode(this->width, this->height), PROJECT_TITLE);
-	window->setFramerateLimit(60);
+	p.setInfo(width, height, distinct, dy);
+	window.setFramerateLimit(60);
 }
 
 void Game::startGame()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		
+
 		this->dead = false;
-		
+
 	}
 }
 
@@ -44,53 +30,53 @@ void Game::update()
 	//Every time check if there is pollEvents
 	checkIfPlayerIsDead();
 	pollEvents();
-	p->playerActions();
+	p.playerActions();
 }
 
 void Game::makePlayerAlive()
 {
 	score = 0;
-	p->score = 0;
+	p.score = 0;
 	this->dead = false;
 	Vector2f center = centerOfScreen();
-	p->playerPosition.x = platformPosition[0].x;
-	p->playerPosition.y = platformPosition[0].y - cPlatformWidth;
+	p.playerPosition.x = platformPosition[0].x;
+	p.playerPosition.y = platformPosition[0].y - cPlatformWidth;
 	platformInit = false;
 	dy = 0;
-	p->dy = 0;
+	p.dy = 0;
 }
 
 //Render game window
 void Game::render()
 {
 	//Draw background
-	this->window->draw(this->backgroud);
+	this->window.draw(this->backgroud);
 
 	Menu title(FONTS_PATH);
 	Menu info(FONTS_PATH);
 	Menu scoreText(FONTS_PATH);
 
 	if (this->dead)
-		displayMainMenu(title,info,scoreText);
+		displayMainMenu(title, info, scoreText);
 	else
 	{
-		player.setPosition(p->playerPosition.x, p->playerPosition.y);
-		this->window->draw(this->player);
+		player.setPosition(p.playerPosition.x, p.playerPosition.y);
+		this->window.draw(this->player);
 		drawplatformPosition();
 	}
 
 
-	window->display();
+	window.display();
 }
 
 void Game::pollEvents()
 {
-	while (this->window->pollEvent(this->e))
+	while (this->window.pollEvent(this->e))
 	{
 		switch (this->e.type)
 		{
 		case sf::Event::Closed:
-			this->window->close();
+			this->window.close();
 			break;
 		case sf::Event::MouseButtonPressed:
 			makePlayerAlive();
@@ -102,16 +88,16 @@ void Game::pollEvents()
 
 void Game::checkIfPlayerIsDead()
 {
-	if (p->playerPosition.y + cPlatformWidth > height)
+	if (p.playerPosition.y + cPlatformWidth > height)
 	{
 		this->dead = true;
-		score = p->getPlayerScore();
+		score = p.getPlayerScore();
 	}
 }
 
 sf::RenderWindow* Game::getWindow()
 {
-	return window;
+	return &window;
 }
 
 void Game::setBackgound(const Layout* l)
@@ -126,10 +112,10 @@ void Game::drawplatformPosition()
 	{
 		this->createPlatformPosition2();
 	}
-	for (int i = 0; i < cNumberOfPlatforms; i++)
+	for (size_t i = 0; i < platformPosition.size(); i++)
 	{
 		platform.setPosition(platformPosition[i].x, platformPosition[i].y);
-		window->draw(platform);
+		window.draw(platform);
 	}
 
 }
@@ -144,7 +130,7 @@ void Game::setPlayer(const Layout* l)
 	this->player = l->getSprite();
 }
 
-void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
+void Game::displayMainMenu(Menu title, Menu info, Menu scoreText)
 {
 	sf::Vector2f center = this->centerOfScreen();
 	center.x = 50;
@@ -156,7 +142,7 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	title.setColor(sf::Color::Black);
 	title.setPosition(center);
 	title.setSize(cSizeOfText40);
-	title.show(window);
+	title.show(&window);
 
 	//Info
 	center.y += cMoveTextY;
@@ -165,7 +151,7 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 	info.setColor(sf::Color::Black);
 	info.setPosition(center);
 	info.setSize(cSizeOfText20);
-	info.show(window);
+	info.show(&window);
 	if (score != 0)
 	{
 		sf::Vector2f center2 = this->centerOfScreen();
@@ -175,21 +161,21 @@ void Game::displayMainMenu(Menu title,Menu info,Menu scoreText)
 		scoreText.setColor(sf::Color::Black);
 		scoreText.setPosition(center2);
 		scoreText.setSize(15);
-		scoreText.show(window);
+		scoreText.show(&window);
 	}
 }
 
 void Game::createPlatformPosition2()
 {
 	int min = 0;
-	int validHeight = height / cNumberOfPlatforms - cPlatformHeight;
+	int validHeight = height / platformPosition.size() - cPlatformHeight;
 	int max = validHeight; //Height of platform
 	int range = max - min + 1;
 	int num = rand() % range + min;
 	Vector2f center = centerOfScreen();
-	platformPosition[0].x = center.y- cPlatformWidth; //Minus width of platform
-	platformPosition[0].y = height- cPlatformHeight;
-	for (int i = 1; i < cNumberOfPlatforms; i++)
+	platformPosition[0].x = center.y - cPlatformWidth; //Minus width of platform
+	platformPosition[0].y = height - cPlatformHeight;
+	for (size_t i = 1; i < platformPosition.size(); i++)
 	{
 		platformPosition[i].y = num;
 		num += cDistancePlatforms;
@@ -199,39 +185,15 @@ void Game::createPlatformPosition2()
 	this->platformInit = true;
 }
 
-bool Game::inRange(int start, int end, int nbr)
-{
-	//Returns true if nubmer IS in range
-	for (int i = start; i < end; i++)
-	{
-		if (i == nbr)
-			return true;
-	}
-	return false;
-}
 sf::Vector2f Game::centerOfScreen()
 {
 	return Vector2f(width / 2, height / 2);
 }
-bool Game::checkIfNumberExist(Point* arr, int n, int y)
-{
-	for (int i = 0; i < n; i++)
-	{
-		if (inRange((arr + i)->y, (arr + i)->y + 25, y))
-			return false;
-	}
-	return true;
-}
 sf::Vector2u Game::getSize() const
 {
-	return window->getSize();
+	return window.getSize();
 }
 bool Game::isRunning()
 {
-	return window->isOpen();
-}
-Game::~Game()
-{
-	delete this->window;
-	delete this->p;
+	return window.isOpen();
 }

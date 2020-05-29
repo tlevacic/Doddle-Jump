@@ -21,14 +21,14 @@ void Player::movePlayerScreen()
 {
 	int num = 0;
 
-	if (playerPosition.y <distinct)
-		for (int i = 0; i < cNumberOfPlatforms; i++)
+	if (playerPosition.y < distinct)
+		for (size_t i = 0; i < platformPosition.size(); i++)
 		{
 			playerPosition.y = distinct;
 			platformPosition[i].y = platformPosition[i].y - dy;
 
 
-			if (platformPosition[i].y > height- cBottomPlatformDistance)
+			if (platformPosition[i].y > height - cBottomPlatformDistance)
 			{
 				platformPosition[i].y = num;
 				num += cAddHeightToPlayer;
@@ -41,7 +41,7 @@ void Player::movePlayerScreen()
 void Player::playerCollision()
 {
 	//Fixed values based on size of picture
-	for (int i = 0; i < cNumberOfPlatforms; i++)
+	for (size_t i = 0; i < platformPosition.size(); i++)
 		if ((playerPosition.x + cPlayerWidth > platformPosition[i].x) &&
 			(playerPosition.x + cLeftSizeOfScreen < platformPosition[i].x + cPlatformWidth)
 			&& (playerPosition.y + cPlatformWidth > platformPosition[i].y)
@@ -78,10 +78,11 @@ int Player::getPlayerScore()
 }
 
 
-Player::Player(Point* p)
+Player::Player(std::vector<Point>& p) :
+	platformPosition(p)
 {
-	this->platformPosition = p;
 }
+
 void Player::setInfo(int width, int height, int distinct, int deltaY)
 {
 	this->width = width;

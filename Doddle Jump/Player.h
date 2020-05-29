@@ -7,14 +7,13 @@
 
 class Player
 {
-//Private variables
+	//Private variables
 private:
 	int width;
 	int height;
 	int distinct;
-	Point* platformPosition;
-	const float cDy = 0.3;
-	const int cNumberOfPlatforms = 10;
+	std::vector<Point>& platformPosition;
+	const float cDy = 0.3f;
 	const int cPlayerWidth = 50;
 	const int cPlatformWidth = 70;
 	const int cMovePlayer = 5;
@@ -26,26 +25,25 @@ private:
 
 public: int score;
 public: float dy;
-	
 
-//Public variables
+
+		//Public variables
 public:
 	Point playerPosition;
 
-//Private methods
+	//Private methods
 private:
 	void playerJump();
 	void movePlayerScreen();
 	void playerCollision();
 	void movePlayer();
 
-//Public methods
+	//Public methods
 public:
 	void playerActions();
 	int getPlayerScore();
 	void setInfo(int width, int height, int distinct, int deltaY);
 
 	//Constuctor & Destructor
-	Player(Point* p);
+	Player(std::vector<Point>&);
 };
-

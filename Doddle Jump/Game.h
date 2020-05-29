@@ -9,15 +9,13 @@
 #include "strings.h"
 #include "Menu.h"
 
-#define NumOfplatformPosition 10
-
 //Game class
 class Game
 {
 //Private Variables
 private:
 	//Window info
-	sf::RenderWindow* window;
+	sf::RenderWindow window;
 	sf::Event e;
 
 	const int cPlatformWidth = 70;
@@ -25,7 +23,6 @@ private:
 	const int cPlayerMove = 3;
 	const int cPlatformHeight = 14;
 	const int cLeftSizeOfScreen = 20;
-	const int cNumberOfPlatforms = 10;
 	const int cDistancePlatforms = 80;
 	const int cMoveTextY = 100;
 	const int cMoveTextX = 20;
@@ -35,7 +32,7 @@ private:
 	const int cMoveScoreTextX = 30;
 
 	//Player info
-	Player* p;
+	Player p;
 	const int distinct = 200;
 	float dy;
 	int score;
@@ -45,14 +42,11 @@ private:
 
 	//Textures and helpers
 	sf::Sprite backgroud, platform, player;
-	Point platformPosition[NumOfplatformPosition];
+	std::vector<Point> platformPosition;
 	bool platformInit = false;
 
 //Private methods
 private:
-	//Window info
-	void initVariables();
-	void initGameWindow();
 
 	//Game functionality
 	void startGame();
@@ -70,9 +64,7 @@ private:
 	void displayMainMenu(Menu title, Menu info, Menu scoreText);
 
 	//Helpers
-	bool inRange(int start, int end, int nbr);
 	sf::Vector2f centerOfScreen();
-	bool checkIfNumberExist(Point* arr, int n, int y);
 	sf::Vector2u getSize() const;
 
 //Public methods
@@ -92,10 +84,5 @@ public:
 	//Helpers
 	sf::RenderWindow* getWindow();
 	bool isRunning();
-
-	//Destructor
-	~Game();
-
-
 };
 
